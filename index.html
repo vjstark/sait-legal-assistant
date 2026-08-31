@@ -149,6 +149,21 @@
       box-shadow: 0 4px 14px -6px var(--accent);
     }
 
+    .alt-schedule-link {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 2px 0;
+      text-align: right;
+    }
+
+    .alt-schedule-link:hover { color: var(--accent-text); }
+    .alt-schedule-link b { color: var(--text-secondary); font-weight: 700; }
+    .alt-schedule-link:hover b { color: var(--accent-text); }
+
     .stats-bar {
       display: flex;
       gap: 8px;
@@ -641,6 +656,7 @@
     <div class="block-switcher-wrap">
       <div class="block-switcher-label">Viewing schedule for</div>
       <div class="block-switcher" id="block-switcher"></div>
+      <button class="alt-schedule-link" id="alt-schedule-link"></button>
     </div>
   </header>
 
@@ -807,7 +823,7 @@ const SCHEDULE = {
     ]
   },
   AM: {
-    label: "Block A (Alt.)",
+    label: "Virat's Schedule",
     courses: [
       {
         title: "Introduction to Law",
@@ -1104,11 +1120,25 @@ function renderClock() {
 }
 
 /* ---------- Block switcher ---------- */
+const MAIN_BLOCKS = ["A", "C"];
+
 function renderBlockSwitcher() {
   const el = document.getElementById("block-switcher");
-  el.innerHTML = Object.keys(SCHEDULE).map(key => `
+  el.innerHTML = MAIN_BLOCKS.map(key => `
     <button class="pill block-pill${key === currentBlock ? " active" : ""}" onclick="switchBlock('${key}')">${SCHEDULE[key].label}</button>
   `).join("");
+
+  const altLink = document.getElementById("alt-schedule-link");
+  if (altLink) {
+    if (currentBlock === "AM") {
+      altLink.innerHTML = `&larr; Back to <b>${SCHEDULE.A.label}</b>`;
+      altLink.onclick = () => switchBlock("A");
+    } else {
+      altLink.innerHTML = `Viewing an individual schedule instead? <b>${SCHEDULE.AM.label}</b> &rarr;`;
+      altLink.onclick = () => switchBlock("AM");
+    }
+  }
+
   const label = SCHEDULE[currentBlock].label;
   document.title = `${label} — SAIT Legal Assistant Schedule`;
   const subtitle = document.getElementById("subtitle");
