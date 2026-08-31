@@ -112,13 +112,42 @@
       margin-top: 4px;
     }
 
+    .topbar p b { color: var(--accent-text); font-weight: 700; }
+
+    .block-switcher-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .block-switcher-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
     .block-switcher {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
 
-    .block-pill { font-weight: 700; }
+    .block-pill {
+      font-weight: 800;
+      font-size: 14px;
+      padding: 9px 20px;
+      border-width: 2px;
+    }
+
+    .block-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px -6px var(--accent);
+    }
 
     .stats-bar {
       display: flex;
@@ -493,6 +522,7 @@
 
     @media (max-width: 500px) {
       .topbar h1 { font-size: 19px; }
+      .block-switcher-wrap { align-items: flex-start; }
     }
 
     /* Event detail modal */
@@ -563,6 +593,42 @@
       color: var(--text-muted);
       margin-bottom: 2px;
     }
+
+    .modal-where-callout {
+      background: var(--accent-bg);
+      border: 1.5px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .modal-where-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-text);
+      margin-bottom: 6px;
+    }
+
+    .modal-room-big {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--accent-text);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-building {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -570,9 +636,12 @@
   <header class="topbar">
     <div>
       <h1>Legal Assistant — Fall 2026 Schedule</h1>
-      <p>Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
+      <p id="subtitle">Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
     </div>
-    <div class="block-switcher" id="block-switcher"></div>
+    <div class="block-switcher-wrap">
+      <div class="block-switcher-label">Viewing schedule for</div>
+      <div class="block-switcher" id="block-switcher"></div>
+    </div>
   </header>
 
   <div class="stats-bar" id="stats-bar">
@@ -854,15 +923,31 @@ let currentFilter = "all";
 let currentEvents = [];
 
 /* ---------- Event detail modal ---------- */
+function parseRoom(room) {
+  if (room.includes(" · ")) {
+    const [building, roomCode] = room.split(" · ");
+    return { building, roomCode };
+  }
+  const parts = room.trim().split(" ");
+  const roomCode = parts.pop();
+  const building = parts.join(" ") || room;
+  return { building, roomCode };
+}
+
 function openEventModal(idx) {
   const ev = currentEvents[idx];
   if (!ev) return;
   const c = ev.course;
+  const { building, roomCode } = parseRoom(ev.room);
   document.getElementById("modal-body").innerHTML = `
     <span class="badge ${badges[c.type].cls}">${badges[c.type].label}</span>
     <h2 class="modal-title">${c.title}</h2>
     <div class="modal-code">${c.code}</div>
-    <div class="modal-detail"><i class="ti ti-map-pin"></i><div><div class="modal-detail-label">Where</div><b>${ev.room}</b></div></div>
+    <div class="modal-where-callout">
+      <div class="modal-where-label"><i class="ti ti-map-pin"></i> Where to go</div>
+      <div class="modal-room-big">${roomCode}</div>
+      <div class="modal-building">${building}</div>
+    </div>
     <div class="modal-detail"><i class="ti ti-clock"></i><div><div class="modal-detail-label">When</div>${DAY_FULL[ev.daysLabel] || ev.daysLabel} &middot; ${ev.time}</div></div>
     <div class="modal-detail"><i class="ti ti-user"></i><div><div class="modal-detail-label">Instructor</div>${c.instructor}</div></div>
     <div class="modal-detail"><i class="ti ti-calendar"></i><div><div class="modal-detail-label">Term dates</div>${c.dates}</div></div>
@@ -925,6 +1010,10 @@ function renderBlockSwitcher() {
   el.innerHTML = Object.keys(SCHEDULE).map(key => `
     <button class="pill block-pill${key === currentBlock ? " active" : ""}" onclick="switchBlock('${key}')">${SCHEDULE[key].label}</button>
   `).join("");
+  const label = SCHEDULE[currentBlock].label;
+  document.title = `${label} — SAIT Legal Assistant Schedule`;
+  const subtitle = document.getElementById("subtitle");
+  if (subtitle) subtitle.innerHTML = `Southern Alberta Institute of Technology &middot; <b>${label}</b> &middot; Sep 1 – Dec 17, 2026`;
 }
 
 function switchBlock(block) {
