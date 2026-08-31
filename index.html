@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SAIT Legal Assistant — Fall 2026 Schedule</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,75 +71,109 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text-primary);
       min-height: 100vh;
-      padding: 2rem 1rem 4rem;
+      padding: 1.75rem 1rem 4rem;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1040px;
+      max-width: 1180px;
       margin: 0 auto;
     }
 
-    header {
-      margin-bottom: 1.75rem;
-      padding-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    header h1 {
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: -0.3px;
-    }
-
-    header p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-top: 5px;
-    }
-
-    .stats {
+    .topbar {
       display: flex;
-      gap: 1.5rem;
-      margin-top: 1rem;
+      justify-content: space-between;
+      align-items: flex-end;
       flex-wrap: wrap;
+      gap: 14px;
+      padding-bottom: 1.1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.1rem;
     }
 
-    .stat {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .topbar h1 {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .topbar p {
       font-size: 13px;
       color: var(--text-secondary);
+      margin-top: 4px;
     }
-
-    .stat span {
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .section-title {
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin: 2rem 0 0.85rem;
-    }
-
-    .section-title:first-of-type { margin-top: 0; }
 
     .block-switcher {
       display: flex;
       gap: 8px;
-      margin-top: 1rem;
       flex-wrap: wrap;
     }
 
-    .block-pill { font-weight: 600; }
+    .block-pill { font-weight: 700; }
+
+    .stats-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .stat-chip i { font-size: 14px; }
+    .stat-chip b { color: var(--text-primary); font-weight: 700; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    @media (min-width: 960px) {
+      .layout { grid-template-columns: 1.4fr 1fr; }
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 10px 28px -18px rgba(0, 0, 0, 0.18);
+    }
+
+    .panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .panel-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 0.9rem;
+    }
+
+    .timetable-panel .panel-title { margin-bottom: 0.9rem; }
 
     /* Empty block state */
     .empty-block-note {
@@ -193,7 +230,6 @@
       overflow-x: auto;
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: var(--surface);
     }
 
     .tt-grid { min-width: 640px; }
@@ -311,14 +347,13 @@
 
     .filters {
       display: flex;
-      gap: 8px;
-      margin-bottom: 1.5rem;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .pill {
-      font-size: 13px;
-      padding: 6px 14px;
+      font-size: 12px;
+      padding: 5px 12px;
       border-radius: 20px;
       border: 1px solid var(--border-strong);
       background: var(--surface);
@@ -339,145 +374,146 @@
       border-color: var(--accent);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 14px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 1.1rem 1.25rem;
+    .class-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      transition: border-color 0.15s;
+      gap: 8px;
     }
 
-    .card:hover { border-color: var(--border-strong); }
+    .class-row {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border-strong);
+      border-radius: 10px;
+      padding: 9px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-    .card-header {
+    .class-row-top {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .card-title {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.35;
+    .class-row-title {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
-    .card-code {
-      font-size: 11px;
+    .class-row-code {
+      font-size: 10.5px;
       color: var(--text-muted);
-      margin-top: 3px;
+      margin-top: 2px;
+    }
+
+    .class-row-meta {
+      font-size: 11px;
+      color: var(--text-secondary);
     }
 
     .badge {
-      font-size: 11px;
-      padding: 3px 9px;
+      font-size: 10px;
+      padding: 3px 8px;
       border-radius: 20px;
       white-space: nowrap;
       flex-shrink: 0;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .badge-inperson { background: var(--success-bg); color: var(--success-text); }
     .badge-online   { background: var(--accent-bg);  color: var(--accent-text); }
     .badge-async    { background: var(--warning-bg);  color: var(--warning-text); }
 
-    .divider { height: 1px; background: var(--border); }
-
-    .detail {
+    .class-row-sessions {
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.4;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .detail i { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
-    .detail b { color: var(--text-primary); font-weight: 600; }
-
-    .times { display: flex; flex-direction: column; gap: 4px; }
-
     .time-chip {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      background: var(--bg);
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 5px 8px;
-      font-size: 11px;
+      padding: 3px 7px;
+      font-size: 10.5px;
       color: var(--text-primary);
     }
 
     .time-chip b { color: var(--accent-text); }
 
     .chip-room {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       font-weight: 700;
       color: var(--text-primary);
     }
 
-    .chip-room i { font-size: 12px; color: var(--accent-text); }
+    .chip-room i { font-size: 11px; color: var(--accent-text); }
 
     .empty {
-      grid-column: 1 / -1;
       text-align: center;
-      padding: 3rem;
+      padding: 2.5rem 1rem;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13px;
     }
 
     @media (max-width: 500px) {
-      .grid { grid-template-columns: 1fr; }
-      header h1 { font-size: 18px; }
+      .topbar h1 { font-size: 19px; }
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1>Legal Assistant — Fall 2026 Schedule</h1>
-    <p>Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
-    <div class="block-switcher" id="block-switcher"></div>
-    <div class="stats">
-      <div class="stat"><i class="ti ti-book"></i><span id="stat-total">0</span> classes</div>
-      <div class="stat"><i class="ti ti-map-pin"></i><span id="stat-inperson">0</span> in person</div>
-      <div class="stat"><i class="ti ti-wifi"></i><span id="stat-online">0</span> online sync</div>
-      <div class="stat"><i class="ti ti-clock-pause"></i><span id="stat-async">0</span> asynchronous</div>
+  <header class="topbar">
+    <div>
+      <h1>Legal Assistant — Fall 2026 Schedule</h1>
+      <p>Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
     </div>
+    <div class="block-switcher" id="block-switcher"></div>
   </header>
+
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat-chip"><i class="ti ti-book"></i><b id="stat-total">0</b> classes</div>
+    <div class="stat-chip"><i class="ti ti-map-pin"></i><b id="stat-inperson">0</b> in person</div>
+    <div class="stat-chip"><i class="ti ti-wifi"></i><b id="stat-online">0</b> online sync</div>
+    <div class="stat-chip"><i class="ti ti-clock-pause"></i><b id="stat-async">0</b> asynchronous</div>
+  </div>
 
   <div id="onetime-container"></div>
   <div id="empty-block-container"></div>
 
-  <div class="section-title">Weekly schedule</div>
-  <div id="conflict-container"></div>
-  <div class="tt-scroll">
-    <div class="tt-grid" id="tt-grid"></div>
-  </div>
-  <div class="tt-legend" id="tt-legend"></div>
+  <div class="layout">
+    <section class="panel timetable-panel">
+      <div class="panel-title">Weekly schedule</div>
+      <div id="conflict-container"></div>
+      <div class="tt-scroll">
+        <div class="tt-grid" id="tt-grid"></div>
+      </div>
+      <div class="tt-legend" id="tt-legend"></div>
+    </section>
 
-  <div class="section-title">All classes</div>
-  <div class="filters">
-    <button class="pill active" onclick="filter('all', this)">All classes</button>
-    <button class="pill" onclick="filter('inperson', this)">In person</button>
-    <button class="pill" onclick="filter('online', this)">Online sync</button>
-    <button class="pill" onclick="filter('async', this)">Asynchronous</button>
+    <section class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title">All classes</div>
+        <div class="filters">
+          <button class="pill active" onclick="filter('all', this)">All</button>
+          <button class="pill" onclick="filter('inperson', this)">In person</button>
+          <button class="pill" onclick="filter('online', this)">Online</button>
+          <button class="pill" onclick="filter('async', this)">Async</button>
+        </div>
+      </div>
+      <div class="class-list" id="grid"></div>
+    </section>
   </div>
-
-  <div class="grid" id="grid"></div>
 </div>
 
 <script>
@@ -596,7 +632,91 @@ const SCHEDULE = {
   },
   C: {
     label: "Block C",
-    courses: []
+    pending: ["Corporate Law"],
+    courses: [
+      {
+        title: "Introduction to Law",
+        code: "Legal 200 · Section C · CRN 21439",
+        type: "inperson",
+        color: "c1",
+        instructor: "Penelope Hamilton",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "M", time: "8:00 – 9:50 AM", room: "Senator Burns Building NH308" },
+          { days: "W", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MB304" }
+        ]
+      },
+      {
+        title: "Grammar and Proofreading",
+        code: "English 205 · Section C · CRN 21065",
+        type: "inperson",
+        color: "c3",
+        instructor: "Suzanne Chomery",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "T", time: "8:00 – 10:50 AM", room: "Stan Grad Centre MB221" }
+        ]
+      },
+      {
+        title: "Keyboard Skill Building",
+        code: "Legal 205 · Section C · CRN 21426",
+        type: "online",
+        color: "c4",
+        instructor: "Jamie Larkam",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "M", time: "1:00 – 1:50 PM", room: "Online · ONLINE45" },
+          { days: "T", time: "12:00 – 12:50 PM", room: "Online · ONLINE45" },
+          { days: "W", time: "1:00 – 1:50 PM", room: "Online · ONLINE45" },
+          { days: "F", time: "12:00 – 12:50 PM", room: "Online · ONLINE45" }
+        ]
+      },
+      {
+        title: "Legal Computer Applications I",
+        code: "Legal 215 · Section C · CRN 21430",
+        type: "inperson",
+        color: "c5",
+        instructor: "Lindsay Savage",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "T", time: "8:00 – 9:50 AM", room: "Senator Burns Building NN906" },
+          { days: "M", time: "10:00 – 11:50 AM", room: "Senator Burns Building NH308" }
+        ]
+      },
+      {
+        title: "The SAIT Experience",
+        code: "Academic Upgrading 100 · Section BA2 · CRN 22800",
+        type: "async",
+        color: "muted",
+        instructor: "Shauna Issler",
+        room: "Online · ONLINE30",
+        dates: "Aug 17 – Dec 17, 2026",
+        sessions: []
+      },
+      {
+        title: "LaunchPad – School of Business",
+        code: "Orientation 001 · Section LA · CRN 22781",
+        type: "async",
+        color: "muted",
+        instructor: "No assigned instructor",
+        room: "Online · ONLINE45",
+        dates: "Aug 3, 2026 – Apr 29, 2028",
+        sessions: []
+      },
+      {
+        title: "Orientation",
+        code: "Orientation 118 · Section LA1 · CRN 22666",
+        type: "inperson",
+        color: "c6",
+        instructor: "No assigned instructor",
+        room: "Senator Burns Building NN105",
+        dates: "Aug 26, 2026 only",
+        oneTime: true,
+        sessions: [
+          { days: "Wed Aug 26", time: "9:45 AM – 3:50 PM" }
+        ]
+      }
+    ]
   }
 };
 
@@ -655,14 +775,25 @@ function renderOneTime(courses) {
   `).join("");
 }
 
-/* ---------- Empty block state ---------- */
+/* ---------- Empty / pending block state ---------- */
 function renderEmptyState(courses) {
   const el = document.getElementById("empty-block-container");
-  el.innerHTML = courses.length ? "" : `
-    <div class="empty-block-note">
-      <i class="ti ti-info-circle"></i>
-      <span>${SCHEDULE[currentBlock].label} schedule hasn't been added yet — check back soon.</span>
-    </div>`;
+  const pending = SCHEDULE[currentBlock].pending || [];
+  if (!courses.length) {
+    el.innerHTML = `
+      <div class="empty-block-note">
+        <i class="ti ti-info-circle"></i>
+        <span>${SCHEDULE[currentBlock].label} schedule hasn't been added yet — check back soon.</span>
+      </div>`;
+  } else if (pending.length) {
+    el.innerHTML = `
+      <div class="empty-block-note">
+        <i class="ti ti-info-circle"></i>
+        <span>${SCHEDULE[currentBlock].label} is still missing: ${pending.join(", ")} — will be added once confirmed.</span>
+      </div>`;
+  } else {
+    el.innerHTML = "";
+  }
 }
 
 /* ---------- Card list ---------- */
@@ -673,28 +804,20 @@ function renderCards(list) {
     return;
   }
   grid.innerHTML = list.map(c => `
-    <div class="card" style="border-left-color: var(--${c.color}-border, var(--border-strong))">
-      <div class="card-header">
+    <div class="class-row" style="border-left-color: var(--${c.color}-border, var(--border-strong))">
+      <div class="class-row-top">
         <div>
-          <div class="card-title">${c.title}</div>
-          <div class="card-code">${c.code}</div>
+          <div class="class-row-title">${c.title}</div>
+          <div class="class-row-code">${c.code}</div>
         </div>
         <span class="badge ${badges[c.type].cls}">${badges[c.type].label}</span>
       </div>
-      <div class="divider"></div>
-      <div class="detail"><i class="ti ti-user"></i>${c.instructor}</div>
-      ${c.room ? `<div class="detail"><i class="ti ti-map-pin"></i><b>${c.room}</b></div>` : ""}
-      <div class="detail"><i class="ti ti-calendar"></i>${c.dates}</div>
+      <div class="class-row-meta">${c.instructor} &middot; ${c.dates}${c.room ? ` &middot; ${c.room}` : ""}</div>
       ${c.sessions.length
-        ? `<div class="divider"></div>
-           <div class="detail"><i class="ti ti-clock"></i>
-             <div class="times">${c.sessions.map(s =>
-               `<span class="time-chip"><b>${DAY_FULL[s.days] || s.days}</b> &middot; ${s.time}${s.room ? `<span class="chip-room"><i class="ti ti-map-pin"></i>${s.room}</span>` : ""}</span>`
-             ).join("")}</div>
-           </div>`
-        : `<div class="detail" style="font-style:italic;color:var(--text-muted)">
-             <i class="ti ti-clock"></i>Self-paced, no fixed times
-           </div>`
+        ? `<div class="class-row-sessions">${c.sessions.map(s =>
+             `<span class="time-chip"><b>${DAY_FULL[s.days] || s.days}</b> &middot; ${s.time}${s.room ? `<span class="chip-room"><i class="ti ti-map-pin"></i>${s.room}</span>` : ""}</span>`
+           ).join("")}</div>`
+        : `<div class="class-row-meta" style="font-style:italic">Self-paced, no fixed times</div>`
       }
     </div>
   `).join("");
