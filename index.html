@@ -435,6 +435,8 @@
 </div>
 
 <script>
+const DAY_FULL = { M: "Mon", T: "Tue", W: "Wed", Th: "Thu", F: "Fri" };
+
 const courses = [
   {
     title: "Introduction to Law",
@@ -442,11 +444,10 @@ const courses = [
     type: "inperson",
     color: "c1",
     instructor: "Penelope Hamilton",
-    room: "Stan Grad Centre MB211 / MB023",
     dates: "Sep 1 – Dec 17, 2026",
     sessions: [
-      { days: "T/Th", time: "2:00 – 4:50 PM" },
-      { days: "T/Th", time: "8:00 – 9:50 AM" }
+      { days: "Th", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MB304" },
+      { days: "M", time: "2:00 – 3:50 PM", room: "Stan Grad Centre MB023" }
     ]
   },
   {
@@ -455,11 +456,10 @@ const courses = [
     type: "inperson",
     color: "c2",
     instructor: "Kyle Meema",
-    room: "Stan Grad Centre MB021 / MD308",
     dates: "Sep 1 – Dec 17, 2026",
     sessions: [
-      { days: "M/W", time: "11:00 AM – 12:50 PM" },
-      { days: "M/W", time: "8:00 – 9:50 AM" }
+      { days: "T", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MD308" },
+      { days: "W", time: "11:00 AM – 12:50 PM", room: "Stan Grad Centre MB021" }
     ]
   },
   {
@@ -468,23 +468,23 @@ const courses = [
     type: "inperson",
     color: "c3",
     instructor: "Suzanne Chomery",
-    room: "Stan Grad Centre MB304 / MB023",
     dates: "Sep 1 – Dec 17, 2026",
     sessions: [
-      { days: "M/W", time: "2:00 – 3:50 PM" }
+      { days: "F", time: "2:00 – 4:50 PM", room: "Stan Grad Centre MB211" }
     ]
   },
   {
     title: "Keyboard Skill Building",
-    code: "Legal 205 · Section A",
+    code: "Legal 205 · Section A · CRN 21424",
     type: "online",
     color: "c4",
     instructor: "Jamie Larkam",
-    room: "Online · ONLINE45",
     dates: "Sep 1 – Dec 17, 2026",
     sessions: [
-      { days: "M/W/F", time: "10:00 – 10:50 AM" },
-      { days: "T/Th", time: "9:00 – 9:50 AM" }
+      { days: "M", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" },
+      { days: "T", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" },
+      { days: "W", time: "9:00 – 9:50 AM", room: "Online · ONLINE45" },
+      { days: "F", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" }
     ]
   },
   {
@@ -493,11 +493,10 @@ const courses = [
     type: "inperson",
     color: "c5",
     instructor: "Lindsay Savage",
-    room: "Senator Burns Building NN906",
     dates: "Sep 1 – Dec 17, 2026",
     sessions: [
-      { days: "M/W", time: "8:00 – 9:50 AM" },
-      { days: "T/Th", time: "12:00 – 1:50 PM" }
+      { days: "F", time: "8:00 – 9:50 AM", room: "Senator Burns Building NN906" },
+      { days: "M", time: "12:00 – 1:50 PM", room: "Senator Burns Building NN906" }
     ]
   },
   {
@@ -579,13 +578,13 @@ function renderCards(list) {
       </div>
       <div class="divider"></div>
       <div class="detail"><i class="ti ti-user"></i>${c.instructor}</div>
-      <div class="detail"><i class="ti ti-map-pin"></i><b>${c.room}</b></div>
+      ${c.room ? `<div class="detail"><i class="ti ti-map-pin"></i><b>${c.room}</b></div>` : ""}
       <div class="detail"><i class="ti ti-calendar"></i>${c.dates}</div>
       ${c.sessions.length
         ? `<div class="divider"></div>
            <div class="detail"><i class="ti ti-clock"></i>
              <div class="times">${c.sessions.map(s =>
-               `<span class="time-chip"><b>${s.days}</b> &middot; ${s.time}</span>`
+               `<span class="time-chip"><b>${DAY_FULL[s.days] || s.days}</b> &middot; ${s.time}${s.room ? ` &middot; ${s.room}` : ""}</span>`
              ).join("")}</div>
            </div>`
         : `<div class="detail" style="font-style:italic;color:var(--text-muted)">
@@ -650,7 +649,7 @@ function getEvents() {
       if (!range) return;
       const [start, end] = range;
       validDays.forEach(t => {
-        events.push({ course: c, day: DAY_MAP[t], start, end, time: s.time, daysLabel: s.days });
+        events.push({ course: c, day: DAY_MAP[t], start, end, time: s.time, daysLabel: s.days, room: s.room });
       });
     });
   });
@@ -733,12 +732,12 @@ function buildTimetable() {
       return `
         <div class="tt-event"
              data-type="${ev.course.type}"
-             title="${ev.course.title} · ${ev.daysLabel} ${ev.time} · ${ev.course.room}"
+             title="${ev.course.title} · ${DAY_FULL[ev.daysLabel] || ev.daysLabel} ${ev.time} · ${ev.room}"
              style="top:${top}px; height:${height}px; left:calc(${left}% + 2px); width:calc(${width}% - 4px);
                     background: var(--${ev.course.color}-bg); border-color: var(--${ev.course.color}-border); color: var(--${ev.course.color}-text);">
           <div class="tt-event-title">${ev.course.title}</div>
           <div class="tt-event-room">${ev.time}</div>
-          <div class="tt-event-room">${ev.course.room.replace(/^Online · /, "")}</div>
+          <div class="tt-event-room">${ev.room.replace(/^Online · /, "")}</div>
         </div>`;
     }).join("");
     return `<div class="tt-day-col${dayIdx === todayIdx ? " today" : ""}" style="height:${bodyHeight}px">${eventsHtml}</div>`;
@@ -770,7 +769,7 @@ function buildTimetable() {
       const key = cluster.map(e => `${e.course.title}:${e.daysLabel}:${e.time}`).sort().join("|");
       if (seen.has(key)) return;
       seen.add(key);
-      const parts = cluster.map(e => `${e.course.title} (<b>${e.daysLabel} ${e.time}</b>)`);
+      const parts = cluster.map(e => `${e.course.title} (<b>${DAY_FULL[e.daysLabel] || e.daysLabel} ${e.time}</b>)`);
       lines.push(parts.join(" overlaps with "));
     });
     conflictContainer.innerHTML = `
