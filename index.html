@@ -137,6 +137,20 @@
     .stat-chip i { font-size: 14px; }
     .stat-chip b { color: var(--text-primary); font-weight: 700; }
 
+    .now-chip {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+      color: var(--accent-text);
+      font-weight: 600;
+    }
+
+    .term-chip {
+      background: var(--warning-bg);
+      border-color: var(--warning-text);
+      color: var(--warning-text);
+      font-weight: 600;
+    }
+
     .layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -482,6 +496,8 @@
   </header>
 
   <div class="stats-bar" id="stats-bar">
+    <div class="stat-chip now-chip" id="now-chip"><i class="ti ti-calendar-time"></i></div>
+    <div class="stat-chip term-chip" id="term-chip" hidden><i class="ti ti-info-circle"></i></div>
     <div class="stat-chip"><i class="ti ti-book"></i><b id="stat-total">0</b> classes</div>
     <div class="stat-chip"><i class="ti ti-map-pin"></i><b id="stat-inperson">0</b> in person</div>
     <div class="stat-chip"><i class="ti ti-wifi"></i><b id="stat-online">0</b> online sync</div>
@@ -520,6 +536,8 @@
 const DAY_FULL = { M: "Mon", T: "Tue", W: "Wed", Th: "Thu", F: "Fri" };
 const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 const DAY_MAP = { M: 0, T: 1, W: 2, Th: 3, F: 4 };
+const TERM_START = new Date(2026, 8, 1);
+const TERM_END = new Date(2026, 11, 17);
 const START_MIN = 8 * 60;
 const END_MIN = 17 * 60;
 const PX_PER_MIN = 1.25;
@@ -745,6 +763,39 @@ function getInitialBlock() {
 let currentBlock = getInitialBlock();
 let currentFilter = "all";
 
+/* ---------- Live date / term status ---------- */
+function startOfDay(d) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
+function getTermStatus() {
+  const today = startOfDay(new Date());
+  if (today < TERM_START) {
+    const days = Math.round((TERM_START - today) / 86400000);
+    return { inTerm: false, message: `Term starts ${TERM_START.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} — ${days} day${days === 1 ? "" : "s"} away` };
+  }
+  if (today > TERM_END) {
+    return { inTerm: false, message: `Term ended ${TERM_END.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` };
+  }
+  return { inTerm: true, message: null };
+}
+
+function renderClock() {
+  const now = new Date();
+  const nowChip = document.getElementById("now-chip");
+  if (nowChip) {
+    nowChip.innerHTML = `<i class="ti ti-calendar-time"></i> ${now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" })} &middot; <b>${now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}</b>`;
+  }
+  const term = getTermStatus();
+  const termChip = document.getElementById("term-chip");
+  if (termChip) {
+    termChip.hidden = term.inTerm;
+    if (!term.inTerm) {
+      termChip.innerHTML = `<i class="ti ti-info-circle"></i> ${term.message}`;
+    }
+  }
+}
+
 /* ---------- Block switcher ---------- */
 function renderBlockSwitcher() {
   const el = document.getElementById("block-switcher");
@@ -834,6 +885,13 @@ function renderCards(list) {
   `).join("");
 }
 
+function applyFilterDim() {
+  document.querySelectorAll(".tt-event").forEach(el => {
+    const match = currentFilter === "all" || el.dataset.type === currentFilter;
+    el.classList.toggle("dimmed", !match);
+  });
+}
+
 function filter(type, btn) {
   currentFilter = type;
   document.querySelectorAll(".filters .pill").forEach(p => p.classList.remove("active"));
@@ -841,10 +899,7 @@ function filter(type, btn) {
   const courses = SCHEDULE[currentBlock].courses;
   const filtered = type === "all" ? courses : courses.filter(c => c.type === type);
   renderCards(filtered);
-  document.querySelectorAll(".tt-event").forEach(el => {
-    const match = type === "all" || el.dataset.type === type;
-    el.classList.toggle("dimmed", !match);
-  });
+  applyFilterDim();
 }
 
 /* ---------- Weekly timetable ---------- */
@@ -940,7 +995,8 @@ function buildTimetable(courses) {
   const bodyHeight = totalMin * PX_PER_MIN;
 
   const today = new Date();
-  const todayIdx = today.getDay() >= 1 && today.getDay() <= 5 ? today.getDay() - 1 : -1;
+  const inTerm = getTermStatus().inTerm;
+  const todayIdx = inTerm && today.getDay() >= 1 && today.getDay() <= 5 ? today.getDay() - 1 : -1;
 
   // Header
   const headerHtml = `
@@ -1028,7 +1084,10 @@ function renderAll() {
   buildTimetable(courses);
 }
 
+renderClock();
 renderAll();
+setInterval(renderClock, 30000);
+setInterval(() => { buildTimetable(SCHEDULE[currentBlock].courses); applyFilterDim(); }, 60000);
 </script>
 </body>
 </html>
