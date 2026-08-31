@@ -23,7 +23,18 @@
       --success-text: #166534;
       --warning-bg: #fffbeb;
       --warning-text: #92400e;
+      --danger-bg: #fef2f2;
+      --danger-text: #b91c1c;
+      --danger-border: #fca5a5;
       --radius: 8px;
+      --today-tint: rgba(37, 99, 235, 0.06);
+
+      --c1-bg: #dbeafe; --c1-border: #3b82f6; --c1-text: #1e40af;
+      --c2-bg: #ede9fe; --c2-border: #8b5cf6; --c2-text: #5b21b6;
+      --c3-bg: #d1fae5; --c3-border: #10b981; --c3-text: #065f46;
+      --c4-bg: #fef3c7; --c4-border: #f59e0b; --c4-text: #92400e;
+      --c5-bg: #fce7f3; --c5-border: #ec4899; --c5-text: #9d174d;
+      --c6-bg: #e2e8f0; --c6-border: #64748b; --c6-text: #334155;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -42,6 +53,17 @@
         --success-text: #86efac;
         --warning-bg: #1c1400;
         --warning-text: #fcd34d;
+        --danger-bg: #2a1212;
+        --danger-text: #fca5a5;
+        --danger-border: #7f1d1d;
+        --today-tint: rgba(59, 130, 246, 0.10);
+
+        --c1-bg: #1e3a5f; --c1-border: #3b82f6; --c1-text: #93c5fd;
+        --c2-bg: #2e1065; --c2-border: #8b5cf6; --c2-text: #c4b5fd;
+        --c3-bg: #052e16; --c3-border: #10b981; --c3-text: #86efac;
+        --c4-bg: #1c1400; --c4-border: #f59e0b; --c4-text: #fcd34d;
+        --c5-bg: #3b0a2a; --c5-border: #ec4899; --c5-text: #f9a8d4;
+        --c6-bg: #1e293b; --c6-border: #64748b; --c6-text: #cbd5e1;
       }
     }
 
@@ -54,12 +76,12 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
     header {
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
       padding-bottom: 1.25rem;
       border-bottom: 1px solid var(--border);
     }
@@ -94,6 +116,165 @@
     .stat span {
       font-weight: 500;
       color: var(--text-primary);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin: 2rem 0 0.85rem;
+    }
+
+    .section-title:first-of-type { margin-top: 0; }
+
+    /* One-time event banner */
+    .onetime-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--c6-bg);
+      border: 1px solid var(--c6-border);
+      color: var(--c6-text);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 1.5rem;
+    }
+
+    .onetime-banner i { font-size: 16px; flex-shrink: 0; }
+    .onetime-banner b { font-weight: 600; }
+
+    /* Conflict banner */
+    .conflict-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      color: var(--danger-text);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 0.85rem;
+    }
+
+    .conflict-banner i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* Timetable */
+    .tt-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .tt-grid { min-width: 640px; }
+
+    .tt-header {
+      display: grid;
+      grid-template-columns: 52px repeat(5, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tt-header-cell {
+      padding: 10px 6px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .tt-header-cell.today {
+      background: var(--today-tint);
+      color: var(--accent-text);
+      border-radius: 6px 6px 0 0;
+    }
+
+    .tt-body {
+      display: grid;
+      grid-template-columns: 52px repeat(5, 1fr);
+      position: relative;
+    }
+
+    .tt-hours {
+      position: relative;
+    }
+
+    .tt-hour-label {
+      position: absolute;
+      left: 0;
+      right: 6px;
+      text-align: right;
+      font-size: 10px;
+      color: var(--text-muted);
+      transform: translateY(-6px);
+    }
+
+    .tt-day-col {
+      position: relative;
+      border-left: 1px solid var(--border);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        var(--border) 0,
+        var(--border) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+    }
+
+    .tt-day-col.today { background-color: var(--today-tint); }
+
+    .tt-event {
+      position: absolute;
+      border-radius: 6px;
+      border: 1px solid;
+      padding: 4px 6px;
+      font-size: 11px;
+      line-height: 1.3;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .tt-event .tt-event-title {
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tt-event .tt-event-room {
+      opacity: 0.85;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tt-event.dimmed { opacity: 0.25; }
+
+    .tt-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 0.85rem;
+    }
+
+    .tt-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .tt-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      border: 1px solid;
+      flex-shrink: 0;
     }
 
     .filters {
@@ -135,6 +316,7 @@
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
+      border-left: 4px solid var(--border-strong);
       border-radius: 12px;
       padding: 1.1rem 1.25rem;
       display: flex;
@@ -189,6 +371,7 @@
     }
 
     .detail i { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .detail b { color: var(--text-primary); font-weight: 600; }
 
     .times { display: flex; flex-direction: column; gap: 4px; }
 
@@ -201,6 +384,8 @@
       font-size: 11px;
       color: var(--text-primary);
     }
+
+    .time-chip b { color: var(--accent-text); }
 
     .empty {
       grid-column: 1 / -1;
@@ -222,13 +407,23 @@
     <h1>Virat Joshi — Fall 2026</h1>
     <p>Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
     <div class="stats">
-      <div class="stat"><i class="ti ti-book"></i><span id="total-count">8</span> classes registered</div>
-      <div class="stat"><i class="ti ti-map-pin"></i><span>3</span> in person</div>
-      <div class="stat"><i class="ti ti-wifi"></i><span>2</span> online sync</div>
-      <div class="stat"><i class="ti ti-clock-pause"></i><span>3</span> asynchronous</div>
+      <div class="stat"><i class="ti ti-book"></i><span id="stat-total">0</span> classes registered</div>
+      <div class="stat"><i class="ti ti-map-pin"></i><span id="stat-inperson">0</span> in person</div>
+      <div class="stat"><i class="ti ti-wifi"></i><span id="stat-online">0</span> online sync</div>
+      <div class="stat"><i class="ti ti-clock-pause"></i><span id="stat-async">0</span> asynchronous</div>
     </div>
   </header>
 
+  <div id="onetime-container"></div>
+
+  <div class="section-title">Weekly schedule</div>
+  <div id="conflict-container"></div>
+  <div class="tt-scroll">
+    <div class="tt-grid" id="tt-grid"></div>
+  </div>
+  <div class="tt-legend" id="tt-legend"></div>
+
+  <div class="section-title">All classes</div>
   <div class="filters">
     <button class="pill active" onclick="filter('all', this)">All classes</button>
     <button class="pill" onclick="filter('inperson', this)">In person</button>
@@ -245,6 +440,7 @@ const courses = [
     title: "Introduction to Law",
     code: "Legal 200 · Section A · CRN 21437",
     type: "inperson",
+    color: "c1",
     instructor: "Penelope Hamilton",
     room: "Stan Grad Centre MB211 / MB023",
     dates: "Sep 1 – Dec 17, 2026",
@@ -257,6 +453,7 @@ const courses = [
     title: "Corporate Law",
     code: "Legal 210 · Section A · CRN 21441",
     type: "inperson",
+    color: "c2",
     instructor: "Kyle Meema",
     room: "Stan Grad Centre MB021 / MD308",
     dates: "Sep 1 – Dec 17, 2026",
@@ -269,6 +466,7 @@ const courses = [
     title: "Grammar and Proofreading",
     code: "English 205 · Section D · CRN 21066",
     type: "inperson",
+    color: "c3",
     instructor: "Suzanne Chomery",
     room: "Stan Grad Centre MB304 / MB023",
     dates: "Sep 1 – Dec 17, 2026",
@@ -280,6 +478,7 @@ const courses = [
     title: "Keyboard Skill Building",
     code: "Legal 205 · Section A",
     type: "online",
+    color: "c4",
     instructor: "Jamie Larkam",
     room: "Online · ONLINE45",
     dates: "Sep 1 – Dec 17, 2026",
@@ -292,6 +491,7 @@ const courses = [
     title: "Legal Computer Applications I",
     code: "Legal 215 · Section A · CRN 21428",
     type: "inperson",
+    color: "c5",
     instructor: "Lindsay Savage",
     room: "Senator Burns Building NN906",
     dates: "Sep 1 – Dec 17, 2026",
@@ -304,6 +504,7 @@ const courses = [
     title: "The SAIT Experience",
     code: "Academic Upgrading 100 · Section BA2 · CRN 22800",
     type: "async",
+    color: "muted",
     instructor: "Shauna Issler",
     room: "Online · ONLINE30",
     dates: "Aug 17 – Dec 17, 2026",
@@ -313,6 +514,7 @@ const courses = [
     title: "LaunchPad – School of Business",
     code: "Orientation 001 · Section LA · CRN 22781",
     type: "async",
+    color: "muted",
     instructor: "No assigned instructor",
     room: "Online · ONLINE45",
     dates: "Aug 3, 2026 – Apr 29, 2028",
@@ -322,9 +524,11 @@ const courses = [
     title: "Orientation",
     code: "Orientation 118 · Section LA1 · CRN 22666",
     type: "inperson",
+    color: "c6",
     instructor: "No assigned instructor",
     room: "Senator Burns Building NN105",
     dates: "Aug 26, 2026 only",
+    oneTime: true,
     sessions: [
       { days: "Wed Aug 26", time: "9:45 AM – 3:50 PM" }
     ]
@@ -337,6 +541,27 @@ const badges = {
   async:    { cls: "badge-async",    label: "Asynchronous" }
 };
 
+/* ---------- Stats ---------- */
+function renderStats() {
+  document.getElementById("stat-total").textContent = courses.length;
+  document.getElementById("stat-inperson").textContent = courses.filter(c => c.type === "inperson").length;
+  document.getElementById("stat-online").textContent = courses.filter(c => c.type === "online").length;
+  document.getElementById("stat-async").textContent = courses.filter(c => c.type === "async").length;
+}
+
+/* ---------- One-time events banner ---------- */
+function renderOneTime() {
+  const oneTimers = courses.filter(c => c.oneTime);
+  const el = document.getElementById("onetime-container");
+  el.innerHTML = oneTimers.map(c => `
+    <div class="onetime-banner">
+      <i class="ti ti-calendar-event"></i>
+      <span><b>One-time:</b> ${c.title} — ${c.dates}${c.sessions[0] ? `, ${c.sessions[0].time}` : ""} · ${c.room}</span>
+    </div>
+  `).join("");
+}
+
+/* ---------- Card list ---------- */
 function renderCards(list) {
   const grid = document.getElementById("grid");
   if (!list.length) {
@@ -344,7 +569,7 @@ function renderCards(list) {
     return;
   }
   grid.innerHTML = list.map(c => `
-    <div class="card">
+    <div class="card" style="border-left-color: var(--${c.color}-border, var(--border-strong))">
       <div class="card-header">
         <div>
           <div class="card-title">${c.title}</div>
@@ -354,13 +579,13 @@ function renderCards(list) {
       </div>
       <div class="divider"></div>
       <div class="detail"><i class="ti ti-user"></i>${c.instructor}</div>
-      <div class="detail"><i class="ti ti-map-pin"></i>${c.room}</div>
+      <div class="detail"><i class="ti ti-map-pin"></i><b>${c.room}</b></div>
       <div class="detail"><i class="ti ti-calendar"></i>${c.dates}</div>
       ${c.sessions.length
         ? `<div class="divider"></div>
            <div class="detail"><i class="ti ti-clock"></i>
              <div class="times">${c.sessions.map(s =>
-               `<span class="time-chip">${s.days} &middot; ${s.time}</span>`
+               `<span class="time-chip"><b>${s.days}</b> &middot; ${s.time}</span>`
              ).join("")}</div>
            </div>`
         : `<div class="detail" style="font-style:italic;color:var(--text-muted)">
@@ -374,10 +599,194 @@ function renderCards(list) {
 function filter(type, btn) {
   document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
   btn.classList.add("active");
-  renderCards(type === "all" ? courses : courses.filter(c => c.type === type));
+  const filtered = type === "all" ? courses : courses.filter(c => c.type === type);
+  renderCards(filtered);
+  document.querySelectorAll(".tt-event").forEach(el => {
+    const match = type === "all" || el.dataset.type === type;
+    el.classList.toggle("dimmed", !match);
+  });
 }
 
+/* ---------- Weekly timetable ---------- */
+const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const DAY_MAP = { M: 0, T: 1, W: 2, Th: 3, F: 4 };
+const START_MIN = 8 * 60;
+const END_MIN = 17 * 60;
+const PX_PER_MIN = 1.25;
+
+function toMinutes(t) {
+  const m = t.trim().match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if (!m) return null;
+  let h = parseInt(m[1], 10) % 12;
+  if (/PM/i.test(m[3])) h += 12;
+  return h * 60 + parseInt(m[2], 10);
+}
+
+function parseTimeRange(str) {
+  const parts = str.split(/[–—-]/).map(s => s.trim());
+  if (parts.length !== 2) return null;
+  let [a, b] = parts;
+  const aHasPeriod = /AM|PM/i.test(a);
+  const bHasPeriod = /AM|PM/i.test(b);
+  const bPeriod = (b.match(/AM|PM/i) || [])[0];
+  const aPeriod = (a.match(/AM|PM/i) || [])[0];
+  if (!aHasPeriod && bHasPeriod) a += " " + bPeriod;
+  if (!bHasPeriod && aHasPeriod) b += " " + aPeriod;
+  const start = toMinutes(a);
+  const end = toMinutes(b);
+  if (start === null || end === null) return null;
+  return [start, end];
+}
+
+function getEvents() {
+  const events = [];
+  courses.forEach(c => {
+    if (c.type === "async" || c.oneTime) return;
+    (c.sessions || []).forEach(s => {
+      const tokens = s.days.split("/").map(t => t.trim());
+      const validDays = tokens.filter(t => t in DAY_MAP);
+      if (!validDays.length) return;
+      const range = parseTimeRange(s.time);
+      if (!range) return;
+      const [start, end] = range;
+      validDays.forEach(t => {
+        events.push({ course: c, day: DAY_MAP[t], start, end, time: s.time, daysLabel: s.days });
+      });
+    });
+  });
+  return events;
+}
+
+function layoutDay(dayEvents, conflictClusters) {
+  dayEvents.sort((a, b) => a.start - b.start);
+  const clusters = [];
+  let current = [];
+  let currentEnd = -Infinity;
+  dayEvents.forEach(ev => {
+    if (current.length && ev.start < currentEnd) {
+      current.push(ev);
+      currentEnd = Math.max(currentEnd, ev.end);
+    } else {
+      if (current.length) clusters.push(current);
+      current = [ev];
+      currentEnd = ev.end;
+    }
+  });
+  if (current.length) clusters.push(current);
+
+  clusters.forEach(cluster => {
+    const laneEnds = [];
+    cluster.forEach(ev => {
+      let laneIdx = laneEnds.findIndex(endT => endT <= ev.start);
+      if (laneIdx === -1) { laneIdx = laneEnds.length; laneEnds.push(ev.end); }
+      else laneEnds[laneIdx] = ev.end;
+      ev.lane = laneIdx;
+    });
+    cluster.forEach(ev => { ev.lanes = laneEnds.length; });
+    if (laneEnds.length > 1) conflictClusters.push(cluster);
+  });
+}
+
+function formatHour(h) {
+  const period = h < 12 || h === 24 ? "AM" : "PM";
+  let hour12 = h % 12;
+  if (hour12 === 0) hour12 = 12;
+  return `${hour12} ${period}`;
+}
+
+function buildTimetable() {
+  const events = getEvents();
+  const byDay = [[], [], [], [], []];
+  events.forEach(e => byDay[e.day].push(e));
+
+  const conflictClusters = [];
+  byDay.forEach(dayEvents => layoutDay(dayEvents, conflictClusters));
+
+  const totalMin = END_MIN - START_MIN;
+  const bodyHeight = totalMin * PX_PER_MIN;
+
+  const today = new Date();
+  const todayIdx = today.getDay() >= 1 && today.getDay() <= 5 ? today.getDay() - 1 : -1;
+
+  // Header
+  const headerHtml = `
+    <div class="tt-header">
+      <div class="tt-header-cell"></div>
+      ${DAY_NAMES.map((d, i) => `<div class="tt-header-cell${i === todayIdx ? " today" : ""}">${d}${i === todayIdx ? " · Today" : ""}</div>`).join("")}
+    </div>`;
+
+  // Hour labels
+  const hours = [];
+  for (let h = START_MIN / 60; h < END_MIN / 60; h++) hours.push(h);
+  const hourLabelsHtml = hours.map(h => {
+    const top = (h * 60 - START_MIN) * PX_PER_MIN;
+    return `<div class="tt-hour-label" style="top:${top}px">${formatHour(h)}</div>`;
+  }).join("");
+
+  // Day columns
+  const dayColsHtml = byDay.map((dayEvents, dayIdx) => {
+    const eventsHtml = dayEvents.map(ev => {
+      const top = (ev.start - START_MIN) * PX_PER_MIN;
+      const height = Math.max((ev.end - ev.start) * PX_PER_MIN, 30);
+      const width = 100 / ev.lanes;
+      const left = ev.lane * width;
+      return `
+        <div class="tt-event"
+             data-type="${ev.course.type}"
+             title="${ev.course.title} · ${ev.daysLabel} ${ev.time} · ${ev.course.room}"
+             style="top:${top}px; height:${height}px; left:calc(${left}% + 2px); width:calc(${width}% - 4px);
+                    background: var(--${ev.course.color}-bg); border-color: var(--${ev.course.color}-border); color: var(--${ev.course.color}-text);">
+          <div class="tt-event-title">${ev.course.title}</div>
+          <div class="tt-event-room">${ev.time}</div>
+          <div class="tt-event-room">${ev.course.room.replace(/^Online · /, "")}</div>
+        </div>`;
+    }).join("");
+    return `<div class="tt-day-col${dayIdx === todayIdx ? " today" : ""}" style="height:${bodyHeight}px">${eventsHtml}</div>`;
+  }).join("");
+
+  const bodyHtml = `
+    <div class="tt-body">
+      <div class="tt-hours" style="height:${bodyHeight}px">${hourLabelsHtml}</div>
+      ${dayColsHtml}
+    </div>`;
+
+  document.getElementById("tt-grid").innerHTML = headerHtml + bodyHtml;
+
+  // Legend
+  const legendCourses = courses.filter(c => !c.oneTime && c.type !== "async");
+  document.getElementById("tt-legend").innerHTML = legendCourses.map(c => `
+    <div class="tt-legend-item">
+      <span class="tt-legend-dot" style="background: var(--${c.color}-bg); border-color: var(--${c.color}-border);"></span>
+      ${c.title}
+    </div>
+  `).join("");
+
+  // Conflict banner
+  const conflictContainer = document.getElementById("conflict-container");
+  if (conflictClusters.length) {
+    const seen = new Set();
+    const lines = [];
+    conflictClusters.forEach(cluster => {
+      const key = cluster.map(e => `${e.course.title}:${e.daysLabel}:${e.time}`).sort().join("|");
+      if (seen.has(key)) return;
+      seen.add(key);
+      const parts = cluster.map(e => `${e.course.title} (<b>${e.daysLabel} ${e.time}</b>)`);
+      lines.push(parts.join(" overlaps with "));
+    });
+    conflictContainer.innerHTML = `
+      <div class="conflict-banner">
+        <i class="ti ti-alert-triangle"></i>
+        <span>Possible schedule conflict: ${lines.join("; ")}. Worth double-checking with the registrar in case this is a data entry error or alternating section.</span>
+      </div>`;
+  } else {
+    conflictContainer.innerHTML = "";
+  }
+}
+
+renderStats();
+renderOneTime();
 renderCards(courses);
+buildTimetable();
 </script>
 </body>
 </html>
