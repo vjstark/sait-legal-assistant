@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Virat Joshi — Fall 2026 Schedule</title>
+  <title>SAIT Legal Assistant — Fall 2026 Schedule</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -129,6 +129,31 @@
 
     .section-title:first-of-type { margin-top: 0; }
 
+    .block-switcher {
+      display: flex;
+      gap: 8px;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .block-pill { font-weight: 600; }
+
+    /* Empty block state */
+    .empty-block-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px dashed var(--border-strong);
+      color: var(--text-secondary);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-size: 13px;
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-block-note i { font-size: 16px; flex-shrink: 0; }
+
     /* One-time event banner */
     .onetime-banner {
       display: flex;
@@ -245,8 +270,15 @@
       text-overflow: ellipsis;
     }
 
-    .tt-event .tt-event-room {
+    .tt-event .tt-event-time {
       opacity: 0.85;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tt-event .tt-event-room {
+      font-weight: 700;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -376,16 +408,28 @@
     .times { display: flex; flex-direction: column; gap: 4px; }
 
     .time-chip {
-      display: inline-block;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 3px 8px;
+      padding: 5px 8px;
       font-size: 11px;
       color: var(--text-primary);
     }
 
     .time-chip b { color: var(--accent-text); }
+
+    .chip-room {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .chip-room i { font-size: 12px; color: var(--accent-text); }
 
     .empty {
       grid-column: 1 / -1;
@@ -404,10 +448,11 @@
 <body>
 <div class="container">
   <header>
-    <h1>Virat Joshi — Fall 2026</h1>
+    <h1>Legal Assistant — Fall 2026 Schedule</h1>
     <p>Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
+    <div class="block-switcher" id="block-switcher"></div>
     <div class="stats">
-      <div class="stat"><i class="ti ti-book"></i><span id="stat-total">0</span> classes registered</div>
+      <div class="stat"><i class="ti ti-book"></i><span id="stat-total">0</span> classes</div>
       <div class="stat"><i class="ti ti-map-pin"></i><span id="stat-inperson">0</span> in person</div>
       <div class="stat"><i class="ti ti-wifi"></i><span id="stat-online">0</span> online sync</div>
       <div class="stat"><i class="ti ti-clock-pause"></i><span id="stat-async">0</span> asynchronous</div>
@@ -415,6 +460,7 @@
   </header>
 
   <div id="onetime-container"></div>
+  <div id="empty-block-container"></div>
 
   <div class="section-title">Weekly schedule</div>
   <div id="conflict-container"></div>
@@ -436,103 +482,11 @@
 
 <script>
 const DAY_FULL = { M: "Mon", T: "Tue", W: "Wed", Th: "Thu", F: "Fri" };
-
-const courses = [
-  {
-    title: "Introduction to Law",
-    code: "Legal 200 · Section A · CRN 21437",
-    type: "inperson",
-    color: "c1",
-    instructor: "Penelope Hamilton",
-    dates: "Sep 1 – Dec 17, 2026",
-    sessions: [
-      { days: "Th", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MB304" },
-      { days: "M", time: "2:00 – 3:50 PM", room: "Stan Grad Centre MB023" }
-    ]
-  },
-  {
-    title: "Corporate Law",
-    code: "Legal 210 · Section A · CRN 21441",
-    type: "inperson",
-    color: "c2",
-    instructor: "Kyle Meema",
-    dates: "Sep 1 – Dec 17, 2026",
-    sessions: [
-      { days: "T", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MD308" },
-      { days: "W", time: "11:00 AM – 12:50 PM", room: "Stan Grad Centre MB021" }
-    ]
-  },
-  {
-    title: "Grammar and Proofreading",
-    code: "English 205 · Section D · CRN 21066",
-    type: "inperson",
-    color: "c3",
-    instructor: "Suzanne Chomery",
-    dates: "Sep 1 – Dec 17, 2026",
-    sessions: [
-      { days: "F", time: "2:00 – 4:50 PM", room: "Stan Grad Centre MB211" }
-    ]
-  },
-  {
-    title: "Keyboard Skill Building",
-    code: "Legal 205 · Section A · CRN 21424",
-    type: "online",
-    color: "c4",
-    instructor: "Jamie Larkam",
-    dates: "Sep 1 – Dec 17, 2026",
-    sessions: [
-      { days: "M", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" },
-      { days: "T", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" },
-      { days: "W", time: "9:00 – 9:50 AM", room: "Online · ONLINE45" },
-      { days: "F", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" }
-    ]
-  },
-  {
-    title: "Legal Computer Applications I",
-    code: "Legal 215 · Section A · CRN 21428",
-    type: "inperson",
-    color: "c5",
-    instructor: "Lindsay Savage",
-    dates: "Sep 1 – Dec 17, 2026",
-    sessions: [
-      { days: "F", time: "8:00 – 9:50 AM", room: "Senator Burns Building NN906" },
-      { days: "M", time: "12:00 – 1:50 PM", room: "Senator Burns Building NN906" }
-    ]
-  },
-  {
-    title: "The SAIT Experience",
-    code: "Academic Upgrading 100 · Section BA2 · CRN 22800",
-    type: "async",
-    color: "muted",
-    instructor: "Shauna Issler",
-    room: "Online · ONLINE30",
-    dates: "Aug 17 – Dec 17, 2026",
-    sessions: []
-  },
-  {
-    title: "LaunchPad – School of Business",
-    code: "Orientation 001 · Section LA · CRN 22781",
-    type: "async",
-    color: "muted",
-    instructor: "No assigned instructor",
-    room: "Online · ONLINE45",
-    dates: "Aug 3, 2026 – Apr 29, 2028",
-    sessions: []
-  },
-  {
-    title: "Orientation",
-    code: "Orientation 118 · Section LA1 · CRN 22666",
-    type: "inperson",
-    color: "c6",
-    instructor: "No assigned instructor",
-    room: "Senator Burns Building NN105",
-    dates: "Aug 26, 2026 only",
-    oneTime: true,
-    sessions: [
-      { days: "Wed Aug 26", time: "9:45 AM – 3:50 PM" }
-    ]
-  }
-];
+const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const DAY_MAP = { M: 0, T: 1, W: 2, Th: 3, F: 4 };
+const START_MIN = 8 * 60;
+const END_MIN = 17 * 60;
+const PX_PER_MIN = 1.25;
 
 const badges = {
   inperson: { cls: "badge-inperson", label: "In person" },
@@ -540,8 +494,149 @@ const badges = {
   async:    { cls: "badge-async",    label: "Asynchronous" }
 };
 
+const SCHEDULE = {
+  A: {
+    label: "Block A",
+    courses: [
+      {
+        title: "Introduction to Law",
+        code: "Legal 200 · Section A · CRN 21437",
+        type: "inperson",
+        color: "c1",
+        instructor: "Penelope Hamilton",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "Th", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MB304" },
+          { days: "M", time: "2:00 – 3:50 PM", room: "Stan Grad Centre MB023" }
+        ]
+      },
+      {
+        title: "Corporate Law",
+        code: "Legal 210 · Section A · CRN 21441",
+        type: "inperson",
+        color: "c2",
+        instructor: "Kyle Meema",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "T", time: "8:00 – 9:50 AM", room: "Stan Grad Centre MD308" },
+          { days: "W", time: "11:00 AM – 12:50 PM", room: "Stan Grad Centre MB021" }
+        ]
+      },
+      {
+        title: "Grammar and Proofreading",
+        code: "English 205 · Section D · CRN 21066",
+        type: "inperson",
+        color: "c3",
+        instructor: "Suzanne Chomery",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "F", time: "2:00 – 4:50 PM", room: "Stan Grad Centre MB211" }
+        ]
+      },
+      {
+        title: "Keyboard Skill Building",
+        code: "Legal 205 · Section A · CRN 21424",
+        type: "online",
+        color: "c4",
+        instructor: "Jamie Larkam",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "M", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" },
+          { days: "T", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" },
+          { days: "W", time: "9:00 – 9:50 AM", room: "Online · ONLINE45" },
+          { days: "F", time: "10:00 – 10:50 AM", room: "Online · ONLINE45" }
+        ]
+      },
+      {
+        title: "Legal Computer Applications I",
+        code: "Legal 215 · Section A · CRN 21428",
+        type: "inperson",
+        color: "c5",
+        instructor: "Lindsay Savage",
+        dates: "Sep 1 – Dec 17, 2026",
+        sessions: [
+          { days: "F", time: "8:00 – 9:50 AM", room: "Senator Burns Building NN906" },
+          { days: "M", time: "12:00 – 1:50 PM", room: "Senator Burns Building NN906" }
+        ]
+      },
+      {
+        title: "The SAIT Experience",
+        code: "Academic Upgrading 100 · Section BA2 · CRN 22800",
+        type: "async",
+        color: "muted",
+        instructor: "Shauna Issler",
+        room: "Online · ONLINE30",
+        dates: "Aug 17 – Dec 17, 2026",
+        sessions: []
+      },
+      {
+        title: "LaunchPad – School of Business",
+        code: "Orientation 001 · Section LA · CRN 22781",
+        type: "async",
+        color: "muted",
+        instructor: "No assigned instructor",
+        room: "Online · ONLINE45",
+        dates: "Aug 3, 2026 – Apr 29, 2028",
+        sessions: []
+      },
+      {
+        title: "Orientation",
+        code: "Orientation 118 · Section LA1 · CRN 22666",
+        type: "inperson",
+        color: "c6",
+        instructor: "No assigned instructor",
+        room: "Senator Burns Building NN105",
+        dates: "Aug 26, 2026 only",
+        oneTime: true,
+        sessions: [
+          { days: "Wed Aug 26", time: "9:45 AM – 3:50 PM" }
+        ]
+      }
+    ]
+  },
+  C: {
+    label: "Block C",
+    courses: []
+  }
+};
+
+function getInitialBlock() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const fromUrl = (params.get("block") || "").toUpperCase();
+    if (fromUrl && SCHEDULE[fromUrl]) return fromUrl;
+    const stored = localStorage.getItem("block");
+    if (stored && SCHEDULE[stored]) return stored;
+  } catch (e) {}
+  return "A";
+}
+
+let currentBlock = getInitialBlock();
+let currentFilter = "all";
+
+/* ---------- Block switcher ---------- */
+function renderBlockSwitcher() {
+  const el = document.getElementById("block-switcher");
+  el.innerHTML = Object.keys(SCHEDULE).map(key => `
+    <button class="pill block-pill${key === currentBlock ? " active" : ""}" onclick="switchBlock('${key}')">${SCHEDULE[key].label}</button>
+  `).join("");
+}
+
+function switchBlock(block) {
+  if (!SCHEDULE[block]) return;
+  currentBlock = block;
+  currentFilter = "all";
+  try { localStorage.setItem("block", block); } catch (e) {}
+  try {
+    const url = new URL(location.href);
+    url.searchParams.set("block", block.toLowerCase());
+    history.replaceState(null, "", url);
+  } catch (e) {}
+  renderAll();
+}
+
 /* ---------- Stats ---------- */
-function renderStats() {
+function renderStats(courses) {
   document.getElementById("stat-total").textContent = courses.length;
   document.getElementById("stat-inperson").textContent = courses.filter(c => c.type === "inperson").length;
   document.getElementById("stat-online").textContent = courses.filter(c => c.type === "online").length;
@@ -549,7 +644,7 @@ function renderStats() {
 }
 
 /* ---------- One-time events banner ---------- */
-function renderOneTime() {
+function renderOneTime(courses) {
   const oneTimers = courses.filter(c => c.oneTime);
   const el = document.getElementById("onetime-container");
   el.innerHTML = oneTimers.map(c => `
@@ -558,6 +653,16 @@ function renderOneTime() {
       <span><b>One-time:</b> ${c.title} — ${c.dates}${c.sessions[0] ? `, ${c.sessions[0].time}` : ""} · ${c.room}</span>
     </div>
   `).join("");
+}
+
+/* ---------- Empty block state ---------- */
+function renderEmptyState(courses) {
+  const el = document.getElementById("empty-block-container");
+  el.innerHTML = courses.length ? "" : `
+    <div class="empty-block-note">
+      <i class="ti ti-info-circle"></i>
+      <span>${SCHEDULE[currentBlock].label} schedule hasn't been added yet — check back soon.</span>
+    </div>`;
 }
 
 /* ---------- Card list ---------- */
@@ -584,7 +689,7 @@ function renderCards(list) {
         ? `<div class="divider"></div>
            <div class="detail"><i class="ti ti-clock"></i>
              <div class="times">${c.sessions.map(s =>
-               `<span class="time-chip"><b>${DAY_FULL[s.days] || s.days}</b> &middot; ${s.time}${s.room ? ` &middot; ${s.room}` : ""}</span>`
+               `<span class="time-chip"><b>${DAY_FULL[s.days] || s.days}</b> &middot; ${s.time}${s.room ? `<span class="chip-room"><i class="ti ti-map-pin"></i>${s.room}</span>` : ""}</span>`
              ).join("")}</div>
            </div>`
         : `<div class="detail" style="font-style:italic;color:var(--text-muted)">
@@ -596,8 +701,10 @@ function renderCards(list) {
 }
 
 function filter(type, btn) {
-  document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+  currentFilter = type;
+  document.querySelectorAll(".filters .pill").forEach(p => p.classList.remove("active"));
   btn.classList.add("active");
+  const courses = SCHEDULE[currentBlock].courses;
   const filtered = type === "all" ? courses : courses.filter(c => c.type === type);
   renderCards(filtered);
   document.querySelectorAll(".tt-event").forEach(el => {
@@ -607,12 +714,6 @@ function filter(type, btn) {
 }
 
 /* ---------- Weekly timetable ---------- */
-const DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-const DAY_MAP = { M: 0, T: 1, W: 2, Th: 3, F: 4 };
-const START_MIN = 8 * 60;
-const END_MIN = 17 * 60;
-const PX_PER_MIN = 1.25;
-
 function toMinutes(t) {
   const m = t.trim().match(/(\d+):(\d+)\s*(AM|PM)/i);
   if (!m) return null;
@@ -637,7 +738,7 @@ function parseTimeRange(str) {
   return [start, end];
 }
 
-function getEvents() {
+function getEvents(courses) {
   const events = [];
   courses.forEach(c => {
     if (c.type === "async" || c.oneTime) return;
@@ -693,8 +794,8 @@ function formatHour(h) {
   return `${hour12} ${period}`;
 }
 
-function buildTimetable() {
-  const events = getEvents();
+function buildTimetable(courses) {
+  const events = getEvents(courses);
   const byDay = [[], [], [], [], []];
   events.forEach(e => byDay[e.day].push(e));
 
@@ -736,8 +837,8 @@ function buildTimetable() {
              style="top:${top}px; height:${height}px; left:calc(${left}% + 2px); width:calc(${width}% - 4px);
                     background: var(--${ev.course.color}-bg); border-color: var(--${ev.course.color}-border); color: var(--${ev.course.color}-text);">
           <div class="tt-event-title">${ev.course.title}</div>
-          <div class="tt-event-room">${ev.time}</div>
-          <div class="tt-event-room">${ev.room.replace(/^Online · /, "")}</div>
+          <div class="tt-event-time">${ev.time}</div>
+          <div class="tt-event-room"><i class="ti ti-map-pin"></i> ${ev.room.replace(/^Online · /, "")}</div>
         </div>`;
     }).join("");
     return `<div class="tt-day-col${dayIdx === todayIdx ? " today" : ""}" style="height:${bodyHeight}px">${eventsHtml}</div>`;
@@ -782,10 +883,18 @@ function buildTimetable() {
   }
 }
 
-renderStats();
-renderOneTime();
-renderCards(courses);
-buildTimetable();
+function renderAll() {
+  const courses = SCHEDULE[currentBlock].courses;
+  renderBlockSwitcher();
+  renderStats(courses);
+  renderOneTime(courses);
+  renderEmptyState(courses);
+  document.querySelectorAll(".filters .pill").forEach((p, i) => p.classList.toggle("active", i === 0));
+  renderCards(courses);
+  buildTimetable(courses);
+}
+
+renderAll();
 </script>
 </body>
 </html>
