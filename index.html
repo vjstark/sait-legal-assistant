@@ -255,18 +255,21 @@
     }
 
     .tt-header-cell {
-      padding: 10px 6px;
+      padding: 8px 6px;
       text-align: center;
-      font-size: 12px;
-      font-weight: 600;
       color: var(--text-secondary);
     }
+
+    .tt-day-name { font-size: 12px; font-weight: 600; }
+    .tt-day-date { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
 
     .tt-header-cell.today {
       background: var(--today-tint);
       color: var(--accent-text);
       border-radius: 6px 6px 0 0;
     }
+
+    .tt-header-cell.today .tt-day-date { color: var(--accent-text); opacity: 0.85; }
 
     .tt-body {
       display: grid;
@@ -780,6 +783,18 @@ function getTermStatus() {
   return { inTerm: true, message: null };
 }
 
+function getWeekDates() {
+  const now = new Date();
+  const day = now.getDay();
+  const mondayOffset = day === 0 ? -6 : 1 - day;
+  const monday = startOfDay(new Date(now.getFullYear(), now.getMonth(), now.getDate() + mondayOffset));
+  const dates = [];
+  for (let i = 0; i < 5; i++) {
+    dates.push(new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + i));
+  }
+  return dates;
+}
+
 function renderClock() {
   const now = new Date();
   const nowChip = document.getElementById("now-chip");
@@ -999,10 +1014,18 @@ function buildTimetable(courses) {
   const todayIdx = inTerm && today.getDay() >= 1 && today.getDay() <= 5 ? today.getDay() - 1 : -1;
 
   // Header
+  const weekDates = getWeekDates();
   const headerHtml = `
     <div class="tt-header">
       <div class="tt-header-cell"></div>
-      ${DAY_NAMES.map((d, i) => `<div class="tt-header-cell${i === todayIdx ? " today" : ""}">${d}${i === todayIdx ? " · Today" : ""}</div>`).join("")}
+      ${DAY_NAMES.map((d, i) => {
+        const dateLabel = weekDates[i].toLocaleDateString("en-US", { month: "short", day: "numeric" });
+        const isToday = i === todayIdx;
+        return `<div class="tt-header-cell${isToday ? " today" : ""}">
+          <div class="tt-day-name">${d}${isToday ? " · Today" : ""}</div>
+          <div class="tt-day-date">${dateLabel}</div>
+        </div>`;
+      }).join("")}
     </div>`;
 
   // Hour labels
