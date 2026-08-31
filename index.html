@@ -318,8 +318,11 @@
       font-size: 11px;
       line-height: 1.3;
       overflow: hidden;
-      cursor: default;
+      cursor: pointer;
+      transition: filter 0.1s;
     }
+
+    .tt-event:hover, .tt-event:active { filter: brightness(1.08); }
 
     .tt-event .tt-event-title {
       font-weight: 600;
@@ -491,6 +494,75 @@
     @media (max-width: 500px) {
       .topbar h1 { font-size: 19px; }
     }
+
+    /* Event detail modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-overlay[hidden] { display: none; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      max-width: 380px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.45);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      line-height: 1;
+      border-radius: 8px;
+    }
+
+    .modal-close i { font-size: 20px; display: block; }
+    .modal-close:hover { background: var(--bg); color: var(--text-primary); }
+
+    .modal-title { font-size: 18px; font-weight: 800; margin-top: 10px; line-height: 1.3; }
+    .modal-code { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+    .modal-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-detail:first-of-type { margin-top: 14px; }
+    .modal-detail i { font-size: 17px; margin-top: 2px; flex-shrink: 0; color: var(--accent-text); }
+    .modal-detail b { font-weight: 700; }
+
+    .modal-detail-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
   </style>
 </head>
 <body>
@@ -537,6 +609,15 @@
       </div>
       <div class="class-list" id="grid"></div>
     </section>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" hidden onclick="if (event.target === this) closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">
+      <i class="ti ti-x"></i>
+    </button>
+    <div id="modal-body"></div>
   </div>
 </div>
 
@@ -770,6 +851,28 @@ function getInitialBlock() {
 
 let currentBlock = getInitialBlock();
 let currentFilter = "all";
+let currentEvents = [];
+
+/* ---------- Event detail modal ---------- */
+function openEventModal(idx) {
+  const ev = currentEvents[idx];
+  if (!ev) return;
+  const c = ev.course;
+  document.getElementById("modal-body").innerHTML = `
+    <span class="badge ${badges[c.type].cls}">${badges[c.type].label}</span>
+    <h2 class="modal-title">${c.title}</h2>
+    <div class="modal-code">${c.code}</div>
+    <div class="modal-detail"><i class="ti ti-map-pin"></i><div><div class="modal-detail-label">Where</div><b>${ev.room}</b></div></div>
+    <div class="modal-detail"><i class="ti ti-clock"></i><div><div class="modal-detail-label">When</div>${DAY_FULL[ev.daysLabel] || ev.daysLabel} &middot; ${ev.time}</div></div>
+    <div class="modal-detail"><i class="ti ti-user"></i><div><div class="modal-detail-label">Instructor</div>${c.instructor}</div></div>
+    <div class="modal-detail"><i class="ti ti-calendar"></i><div><div class="modal-detail-label">Term dates</div>${c.dates}</div></div>
+  `;
+  document.getElementById("modal-overlay").hidden = false;
+}
+
+function closeModal() {
+  document.getElementById("modal-overlay").hidden = true;
+}
 
 /* ---------- Live date / term status ---------- */
 function startOfDay(d) {
@@ -1005,6 +1108,8 @@ function formatHour(h) {
 
 function buildTimetable(courses) {
   const events = getEvents(courses);
+  events.forEach((e, i) => { e.idx = i; });
+  currentEvents = events;
   const byDay = [[], [], [], [], []];
   events.forEach(e => byDay[e.day].push(e));
 
@@ -1051,6 +1156,7 @@ function buildTimetable(courses) {
       return `
         <div class="tt-event"
              data-type="${ev.course.type}"
+             onclick="openEventModal(${ev.idx})"
              title="${ev.course.title} · ${DAY_FULL[ev.daysLabel] || ev.daysLabel} ${ev.time} · ${ev.room}"
              style="top:${top}px; height:${height}px; left:calc(${left}% + 2px); width:calc(${width}% - 4px);
                     background: var(--${ev.course.color}-bg); border-color: var(--${ev.course.color}-border); color: var(--${ev.course.color}-text);">
@@ -1116,6 +1222,7 @@ renderClock();
 renderAll();
 setInterval(renderClock, 30000);
 setInterval(() => { buildTimetable(SCHEDULE[currentBlock].courses); applyFilterDim(); }, 60000);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 </script>
 </body>
 </html>
