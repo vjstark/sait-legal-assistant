@@ -1,0 +1,52 @@
+@import "tailwindcss";
+/* Streamdown (markdown renderer) ships Tailwind-classed markup — include it. */
+@source "../node_modules/streamdown/dist/*.js";
+
+/*
+ * Design tokens — scholarly, calm, "law library" feel.
+ * Paper background, deep navy ink, serif display headings, amber accent.
+ * Light-only by design: one deliberate look on every device.
+ */
+@theme {
+  --color-paper: #f7f6f2;
+  --color-surface: #ffffff;
+
+  /* Brand navy scale */
+  --color-brand-50: #f2f6fb;
+  --color-brand-100: #e0e9f5;
+  --color-brand-200: #c2d3e8;
+  --color-brand-600: #2c4a76;
+  --color-brand-700: #233c61;
+  --color-brand-800: #1b2f4d;
+  --color-brand-900: #142339;
+
+  /* Accent for highlights (citations, active states) */
+  --color-accent-100: #fdf3dd;
+  --color-accent-700: #a16207;
+
+  --color-line: #e6e3db;
+
+  --radius-card: 0.75rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-slate-700 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif text-brand-900 tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-accent-100 text-brand-900;
+  }
+}

@@ -1,0 +1,30 @@
+# Free Supabase projects pause after ~7 days without activity.
+# This pings the database twice a week so the tutor stays awake.
+#
+# Setup (once, after this folder becomes its own GitHub repo):
+#   Repo → Settings → Secrets and variables → Actions → New repository secret
+#     SUPABASE_URL              = https://<project-ref>.supabase.co
+#     SUPABASE_PUBLISHABLE_KEY  = the same publishable (anon) key as .env.local
+#
+# The query hits a table anonymous users can't read — RLS returns zero rows,
+# but the request still counts as activity, which is all that matters.
+
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "0 8 * * 1,4" # Mondays and Thursdays, 08:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl --fail --silent --show-error \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/courses?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}" \
+            > /dev/null
+          echo "Supabase pinged successfully."
