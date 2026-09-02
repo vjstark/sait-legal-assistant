@@ -214,9 +214,15 @@ begin
     coalesce(matched_invite.role, 'student')
   );
 
-  if matched_invite.id is not null then
-    update public.invites set status = 'accepted' where id = matched_invite.id;
-  end if;
+  -- NOTE: invites are marked 'accepted' in the /auth/callback route when
+  -- the user actually clicks the sign-in link. Do NOT update status here,
+  -- because Supabase's inviteUserByEmail creates the auth user immediately
+  -- (before the recipient has clicked anything), which would falsely mark
+  -- the invite accepted while the email is still unread.
+  --
+  -- if matched_invite.id is not null then
+  --   update public.invites set status = 'accepted' where id = matched_invite.id;
+  -- end if;
 
   return new;
 end;
