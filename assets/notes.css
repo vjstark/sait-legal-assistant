@@ -350,8 +350,14 @@ table.grid .no  { color: var(--text-muted); }
 .foot-note { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
 .foot-note a { color: var(--accent-text); }
 
+/* ---- Comments (giscus / GitHub Discussions) ---------------------------- */
+.comments { margin-top: 2.8rem; padding-top: 1.6rem; border-top: 1px solid var(--border); }
+.comments h2 { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; }
+.comments .comments-sub { font-size: 13.5px; color: var(--text-secondary); margin: 6px 0 16px; max-width: 68ch; }
+.comments .giscus, .comments .giscus-frame { width: 100%; }
+
 /* ---- Responsive -------------------------------------------------------- */
-@media (max-width: 860px) {
+@media (max-width: 760px) {
   .notes-layout { grid-template-columns: 1fr; gap: 0; }
 
   .mobilebar {
@@ -389,7 +395,7 @@ table.grid .no  { color: var(--text-muted); }
 
   .toc .toc-close { display: inline-flex; }
 }
-@media (min-width: 861px) {
+@media (min-width: 761px) {
   .toc .toc-close { display: none; }
 }
 .toc .toc-close {
@@ -402,7 +408,7 @@ table.grid .no  { color: var(--text-muted); }
 /* ---- Print (study guide) ---------------------------------------------- */
 @media print {
   body { background: #fff; color: #000; padding: 0; font-size: 11.5pt; }
-  .site-nav, .theme-toggle, .toc, .mobilebar, .toc-backdrop, .toc-tools, .foot-note .no-print, .btn, .prevnext { display: none !important; }
+  .site-nav, .theme-toggle, .toc, .mobilebar, .toc-backdrop, .toc-tools, .foot-note .no-print, .btn, .prevnext, .comments { display: none !important; }
   .notes-layout { grid-template-columns: 1fr; }
   .topic { display: block !important; margin-bottom: 1.6rem; page-break-inside: auto; }  /* all topics for a full study guide */
   .topic .topic-head { page-break-after: avoid; }
