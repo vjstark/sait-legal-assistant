@@ -34,20 +34,23 @@
   <header class="page-head">
     <div class="eyebrow">SAIT Legal Assistant · Course Notes</div>
     <h1>ENGL 205 — Grammar &amp; Proofreading</h1>
-    <p class="lede">Everything from <strong>Weeks 1 &amp; 2</strong>, in one place: what grammar actually is, how to proofread, and the machinery of a sentence — parts of speech, POSTs, heads &amp; dependents, nouns &amp; nominals, and verb forms. Tap a topic to open it; each ends with a quick self-check. More weeks will be added as the course goes on.</p>
+    <p class="lede">Everything from <strong>Weeks 1 &amp; 2</strong>: what grammar actually is, how to proofread, and the machinery of a sentence — parts of speech, POSTs, heads &amp; dependents, nouns &amp; nominals, and verb forms. Pick a topic from the contents; each ends with a quick self-check. More weeks will be added as the course goes on.</p>
     <div class="toc-tools" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
-      <button class="btn" id="expand-all"><i class="ti ti-arrows-diagonal"></i> Expand all</button>
-      <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i> Print / Save PDF</button>
+      <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i> Print / Save PDF (all topics)</button>
     </div>
   </header>
 
+  <!-- Mobile "Contents" bar: sticky, so the menu is always one tap away -->
+  <div class="mobilebar" id="mobilebar">
+    <button class="mb-menu" id="mb-menu" aria-label="Open contents"><i class="ti ti-list"></i> Contents</button>
+    <span class="mb-current" id="mb-current">1 · What is grammar?</span>
+  </div>
+
   <div class="notes-layout">
 
-    <!-- ============ TABLE OF CONTENTS ============ -->
-    <aside class="toc collapsible" id="toc">
-      <button class="toc-toggle" id="toc-toggle" aria-expanded="false">
-        <span><i class="ti ti-list"></i> On this page</span><i class="ti ti-chevron-down"></i>
-      </button>
+    <!-- ============ CONTENTS ============ -->
+    <aside class="toc" id="toc" aria-label="Table of contents">
+      <button class="toc-close" id="toc-close"><i class="ti ti-x"></i> Close</button>
       <div class="toc-body">
         <h2>Week 1 · Foundations</h2>
         <a href="#grammar">1 · What is grammar?</a>
@@ -63,18 +66,15 @@
       </div>
     </aside>
 
-    <!-- ============ CONTENT (collapsible topics) ============ -->
+    <!-- ============ CONTENT (one topic shown at a time) ============ -->
     <main class="content">
 
       <!-- 1 -->
-      <details class="topic" id="grammar" open>
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
-            <h2 class="sec-title">1 · What is grammar? Prescriptive vs. descriptive</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic active" id="grammar">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
+          <h2 class="sec-title">1 · What is grammar? Prescriptive vs. descriptive</h2>
+        </div>
         <div class="topic-body">
           <p><strong>Grammar</strong> is the set of rules that tells us how words relate to one another to make meaning. It is why <span class="ex">Sally bit my dog</span> tells us Sally did the biting — English word order puts the <em class="term">subject</em> (the doer) before the <em class="term">verb</em>. Scramble it — <span class="ex">today have go work to I to is</span> — and meaning collapses.</p>
           <p>But "rule" means two very different things, and the course cares about the difference.</p>
@@ -112,17 +112,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 2 -->
-      <details class="topic" id="proofreading">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
-            <h2 class="sec-title">2 · Why proofreading is hard (and how to do it)</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="proofreading">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
+          <h2 class="sec-title">2 · Why proofreading is hard (and how to do it)</h2>
+        </div>
         <div class="topic-body">
           <p>Proofreading your own writing is hard for real reasons:</p>
           <ul>
@@ -163,17 +160,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 3 -->
-      <details class="topic" id="errors">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
-            <h2 class="sec-title">3 · Common error types to hunt for</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="errors">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
+          <h2 class="sec-title">3 · Common error types to hunt for</h2>
+        </div>
         <div class="topic-body">
           <h3>Confusing words</h3>
           <div class="table-wrap">
@@ -222,17 +216,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 4 -->
-      <details class="topic" id="pos">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
-            <h2 class="sec-title">4 · Parts of speech &amp; how to categorize a word</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="pos">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+          <h2 class="sec-title">4 · Parts of speech &amp; how to categorize a word</h2>
+        </div>
         <div class="topic-body">
           <p>Every word gets filed into a <strong>word class</strong> (part of speech). This course uses an eight-class scheme (plus interjections). Schemes differ between grammars — categorizing 170,000 words is like sorting paint chips into "red, orange, yellow…": the boundaries are a bit arbitrary, so some words sit on the line.</p>
 
@@ -277,17 +268,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 5 -->
-      <details class="topic" id="catfun">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
-            <h2 class="sec-title">5 · Category vs. function</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="catfun">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+          <h2 class="sec-title">5 · Category vs. function</h2>
+        </div>
         <div class="topic-body">
           <p>A giant screwdriver used to pry open paint cans is <em>categorically</em> a screwdriver but <em>functionally</em> a prybar. Words work the same way: a word's <strong>category</strong> (its word class) can differ from its <strong>function</strong> (the job it does in a sentence).</p>
           <div class="example">
@@ -324,17 +312,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 6 -->
-      <details class="topic" id="posts">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
-            <h2 class="sec-title">6 · POSTs — Parts-of-Speech Tests</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="posts">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+          <h2 class="sec-title">6 · POSTs — Parts-of-Speech Tests</h2>
+        </div>
         <div class="topic-body">
           <p>A <strong>POST</strong> is a sentence pattern with one controlled blank. Your grammar brain only allows certain words into the slot, so the pattern <em>tests</em> how a word can function — without you having to define anything first. Fill <span class="ex">She <span class="slot"></span> friendly</span> and you'll only ever reach for a <strong>linking verb</strong> (<em>is, seems, sounds</em>), never <em>jumps</em>.</p>
 
@@ -366,17 +351,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 7 -->
-      <details class="topic" id="heads">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
-            <h2 class="sec-title">7 · Heads &amp; dependents</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="heads">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+          <h2 class="sec-title">7 · Heads &amp; dependents</h2>
+        </div>
         <div class="topic-body">
           <p>Inside a phrase, one word is the boss:</p>
           <ul>
@@ -403,17 +385,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 8 -->
-      <details class="topic" id="nouns">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
-            <h2 class="sec-title">8 · Nouns &amp; nominals</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="nouns">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+          <h2 class="sec-title">8 · Nouns &amp; nominals</h2>
+        </div>
         <div class="topic-body">
           <p>The old "person, place, or thing" is too narrow. A <strong>noun</strong> can express far more kinds of "thing":</p>
           <ul>
@@ -440,17 +419,14 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <!-- 9 -->
-      <details class="topic" id="verbs">
-        <summary>
-          <div class="topic-head">
-            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
-            <h2 class="sec-title">9 · Verb forms &amp; the jobs they do</h2>
-          </div>
-          <i class="ti ti-chevron-down topic-caret"></i>
-        </summary>
+      <section class="topic" id="verbs">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+          <h2 class="sec-title">9 · Verb forms &amp; the jobs they do</h2>
+        </div>
         <div class="topic-body">
           <p>Every verb has a set of forms (its <em>paradigm</em>) — think of it as a closet of uniforms the verb changes into for different jobs. The verb <em>show</em> has five:</p>
 
@@ -482,7 +458,7 @@
             </div></div>
           </details>
         </div>
-      </details>
+      </section>
 
       <div class="foot-note">
         <p><strong>Want to be quizzed and drill your weak spots?</strong> Open the same material in the <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener">Study Tutor</a> — it turns these notes into Teach-me, cited Q&amp;A, Quiz-me (tracked per topic), and flashcards.</p>
@@ -492,6 +468,8 @@
     </main>
   </div>
 </div>
+
+<div class="toc-backdrop" id="toc-backdrop"></div>
 
 <script>
   // ---- Theme (matches the schedule page) --------------------------------
@@ -516,71 +494,85 @@
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderThemeIcon);
   }
 
-  // ---- Expand / collapse all topics -------------------------------------
-  (function () {
-    var btn = document.getElementById("expand-all");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var topics = document.querySelectorAll("details.topic");
-      var anyClosed = Array.prototype.some.call(topics, function (d) { return !d.open; });
-      topics.forEach(function (d) { d.open = anyClosed; });
-      btn.innerHTML = anyClosed
-        ? '<i class="ti ti-arrows-minimize"></i> Collapse all'
-        : '<i class="ti ti-arrows-diagonal"></i> Expand all';
-    });
-  })();
+  // ---- Topic order (drives nav, prev/next, current-label) ---------------
+  var ORDER = [
+    { id: "grammar",      label: "1 · What is grammar?" },
+    { id: "proofreading", label: "2 · Why proofreading is hard" },
+    { id: "errors",       label: "3 · Common error types" },
+    { id: "pos",          label: "4 · Parts of speech" },
+    { id: "catfun",       label: "5 · Category vs. function" },
+    { id: "posts",        label: "6 · POSTs" },
+    { id: "heads",        label: "7 · Heads & dependents" },
+    { id: "nouns",        label: "8 · Nouns & nominals" },
+    { id: "verbs",        label: "9 · Verb forms" }
+  ];
+  var indexById = {};
+  ORDER.forEach(function (t, i) { indexById[t.id] = i; });
 
-  // ---- Open a topic from the TOC (and on load from the hash) ------------
-  function openTopic(id, scroll) {
-    var t = document.getElementById(id);
-    if (!t || t.tagName.toLowerCase() !== "details") return;
-    t.open = true;
-    if (scroll) t.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-  document.querySelectorAll(".toc-body a").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      var id = a.getAttribute("href").slice(1);
-      e.preventDefault();
-      openTopic(id, true);
-      history.replaceState(null, "", "#" + id);
-      var toc = document.getElementById("toc");
-      if (toc) { toc.classList.remove("open"); }
-    });
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc-body a"));
+  var mbCurrent = document.getElementById("mb-current");
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Build a Prev / Next footer inside each topic
+  ORDER.forEach(function (t, i) {
+    var sec = document.getElementById(t.id);
+    if (!sec) return;
+    var prev = ORDER[i - 1], next = ORDER[i + 1];
+    var nav = document.createElement("nav");
+    nav.className = "prevnext";
+    nav.innerHTML =
+      (prev
+        ? '<a class="prev" href="#' + prev.id + '"><span class="pn-dir">← Previous</span><span class="pn-title">' + prev.label + '</span></a>'
+        : '<a class="prev hide" aria-hidden="true"></a>') +
+      (next
+        ? '<a class="next" href="#' + next.id + '"><span class="pn-dir">Next →</span><span class="pn-title">' + next.label + '</span></a>'
+        : '<a class="next hide" aria-hidden="true"></a>');
+    sec.appendChild(nav);
   });
-  if (location.hash.length > 1) openTopic(location.hash.slice(1), true);
 
-  // ---- Mobile TOC toggle -------------------------------------------------
-  (function () {
-    var toggle = document.getElementById("toc-toggle");
-    var toc = document.getElementById("toc");
-    if (!toggle || !toc) return;
-    toggle.addEventListener("click", function () {
-      var open = toc.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  // ---- Show one topic ----------------------------------------------------
+  function showTopic(id, scroll) {
+    if (!(id in indexById)) id = ORDER[0].id;
+    ORDER.forEach(function (t) {
+      var sec = document.getElementById(t.id);
+      if (sec) sec.classList.toggle("active", t.id === id);
     });
-  })();
+    tocLinks.forEach(function (a) {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+    });
+    if (mbCurrent) mbCurrent.textContent = ORDER[indexById[id]].label;
+    closeMenu();
+    if (scroll) window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }
 
-  // ---- Scroll-spy: highlight the current topic in the TOC --------------
-  (function () {
-    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-body a"));
-    if (!links.length || !("IntersectionObserver" in window)) return;
-    var map = {};
-    links.forEach(function (a) {
-      var id = a.getAttribute("href").slice(1);
-      var sec = document.getElementById(id);
-      if (sec) map[id] = a;
-    });
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          links.forEach(function (a) { a.classList.remove("active"); });
-          var a = map[e.target.id];
-          if (a) a.classList.add("active");
-        }
-      });
-    }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
-    Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
-  })();
+  // Any in-page link to #topic (TOC or prev/next) switches topics
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var id = a.getAttribute("href").slice(1);
+    if (!(id in indexById)) return;
+    e.preventDefault();
+    history.replaceState(null, "", "#" + id);
+    showTopic(id, true);
+  });
+
+  // ---- Mobile contents drawer -------------------------------------------
+  var toc = document.getElementById("toc");
+  var backdrop = document.getElementById("toc-backdrop");
+  function openMenu() { if (toc) toc.classList.add("open"); if (backdrop) backdrop.classList.add("show"); }
+  function closeMenu() { if (toc) toc.classList.remove("open"); if (backdrop) backdrop.classList.remove("show"); }
+  var mbMenu = document.getElementById("mb-menu");
+  var tocClose = document.getElementById("toc-close");
+  if (mbMenu) mbMenu.addEventListener("click", openMenu);
+  if (tocClose) tocClose.addEventListener("click", closeMenu);
+  if (backdrop) backdrop.addEventListener("click", closeMenu);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+
+  // ---- Initial topic (from hash or first) --------------------------------
+  showTopic(location.hash.length > 1 ? location.hash.slice(1) : ORDER[0].id, false);
+  window.addEventListener("hashchange", function () {
+    showTopic(location.hash.length > 1 ? location.hash.slice(1) : ORDER[0].id, false);
+  });
 </script>
 </body>
 </html>
