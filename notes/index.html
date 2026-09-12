@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Course Notes — SAIT Legal Assistant</title>
+  <meta name="description" content="Study notes and reference material for the SAIT Legal Assistant program, Fall 2026." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="../assets/notes.css" />
+</head>
+<body>
+<div class="container reading">
+
+  <nav class="site-nav">
+    <a href="../"><i class="ti ti-calendar-week"></i> Schedule</a>
+    <a href="./" class="active"><i class="ti ti-notebook"></i> Notes</a>
+    <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener"><i class="ti ti-school"></i> Tutor</a>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">SAIT Legal Assistant · Fall 2026</div>
+    <h1>Course Notes</h1>
+    <p class="lede">Shared, printable study notes for the program. Open a course to read the notes, run the self-checks, or print them as a study guide. Anything published here can also be loaded into the <strong>Study Tutor</strong> for AI quizzing and practice.</p>
+  </header>
+
+  <div class="card-grid">
+
+    <a class="course-card live" href="engl205.html">
+      <span class="cc-code">ENGL 205</span>
+      <h3>Grammar &amp; Proofreading</h3>
+      <p>Weeks 1–2: prescriptive vs. descriptive grammar, proofreading, parts of speech, POSTs, heads &amp; dependents, nouns &amp; nominals, verb forms.</p>
+      <div class="cc-foot"><i class="ti ti-arrow-right"></i> Read the notes</div>
+    </a>
+
+    <div class="course-card soon">
+      <span class="cc-code">LEGL 200</span>
+      <h3>Introduction to Law</h3>
+      <p>Notes will appear here as the course is taught.</p>
+      <div class="cc-foot"><span class="pill-soon">Coming soon</span></div>
+    </div>
+
+    <div class="course-card soon">
+      <span class="cc-code">LEGL 210</span>
+      <h3>Intro to Corporate Law</h3>
+      <p>Notes will appear here as the course is taught.</p>
+      <div class="cc-foot"><span class="pill-soon">Coming soon</span></div>
+    </div>
+
+    <div class="course-card soon">
+      <span class="cc-code">LEGA 215</span>
+      <h3>Legal Computer Applications</h3>
+      <p>Notes will appear here as the course is taught.</p>
+      <div class="cc-foot"><span class="pill-soon">Coming soon</span></div>
+    </div>
+
+    <div class="course-card soon">
+      <span class="cc-code">LEGA 205</span>
+      <h3>Keyboard &amp; Typing Skills</h3>
+      <p>Notes will appear here as the course is taught.</p>
+      <div class="cc-foot"><span class="pill-soon">Coming soon</span></div>
+    </div>
+
+  </div>
+
+  <div class="foot-note">
+    <p>Notes are written from the course readings and lecture material and are meant as a study aid, not a replacement for class. Spotted something to fix or add? Edit the files under <span class="tok">/notes</span> in the repo.</p>
+  </div>
+</div>
+
+<script>
+  function currentTheme() {
+    var explicit = document.documentElement.getAttribute("data-theme");
+    if (explicit) return explicit;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function renderThemeIcon() {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.innerHTML = currentTheme() === "dark" ? '<i class="ti ti-sun"></i>' : '<i class="ti ti-moon"></i>';
+  }
+  function toggleTheme() {
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    renderThemeIcon();
+  }
+  renderThemeIcon();
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderThemeIcon);
+  }
+</script>
+</body>
+</html>

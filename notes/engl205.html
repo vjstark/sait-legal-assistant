@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>ENGL 205 Notes — Grammar & Proofreading</title>
+  <meta name="description" content="Study notes for SAIT ENGL 205 (Grammar & Proofreading), Weeks 1–2: prescriptive vs. descriptive grammar, proofreading, parts of speech, POSTs, heads & dependents, nouns & nominals, and verb forms." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="../assets/notes.css" />
+</head>
+<body>
+<div class="container">
+
+  <nav class="site-nav">
+    <a href="../"><i class="ti ti-calendar-week"></i> Schedule</a>
+    <a href="./" class="active"><i class="ti ti-notebook"></i> Notes</a>
+    <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener"><i class="ti ti-school"></i> Tutor</a>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">SAIT Legal Assistant · Course Notes</div>
+    <h1>ENGL 205 — Grammar &amp; Proofreading</h1>
+    <p class="lede">Everything from <strong>Weeks 1 &amp; 2</strong>, in one place: what grammar actually is, how to proofread, and the machinery of a sentence — parts of speech, POSTs, heads &amp; dependents, nouns &amp; nominals, and verb forms. Tap a topic to open it; each ends with a quick self-check. More weeks will be added as the course goes on.</p>
+    <div class="toc-tools" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn" id="expand-all"><i class="ti ti-arrows-diagonal"></i> Expand all</button>
+      <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i> Print / Save PDF</button>
+    </div>
+  </header>
+
+  <div class="notes-layout">
+
+    <!-- ============ TABLE OF CONTENTS ============ -->
+    <aside class="toc collapsible" id="toc">
+      <button class="toc-toggle" id="toc-toggle" aria-expanded="false">
+        <span><i class="ti ti-list"></i> On this page</span><i class="ti ti-chevron-down"></i>
+      </button>
+      <div class="toc-body">
+        <h2>Week 1 · Foundations</h2>
+        <a href="#grammar">1 · What is grammar?</a>
+        <a href="#proofreading">2 · Why proofreading is hard</a>
+        <a href="#errors">3 · Common error types</a>
+        <h2>Week 2 · The sentence</h2>
+        <a href="#pos">4 · Parts of speech</a>
+        <a href="#catfun">5 · Category vs. function</a>
+        <a href="#posts">6 · POSTs</a>
+        <a href="#heads">7 · Heads &amp; dependents</a>
+        <a href="#nouns">8 · Nouns &amp; nominals</a>
+        <a href="#verbs">9 · Verb forms</a>
+      </div>
+    </aside>
+
+    <!-- ============ CONTENT (collapsible topics) ============ -->
+    <main class="content">
+
+      <!-- 1 -->
+      <details class="topic" id="grammar" open>
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
+            <h2 class="sec-title">1 · What is grammar? Prescriptive vs. descriptive</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p><strong>Grammar</strong> is the set of rules that tells us how words relate to one another to make meaning. It is why <span class="ex">Sally bit my dog</span> tells us Sally did the biting — English word order puts the <em class="term">subject</em> (the doer) before the <em class="term">verb</em>. Scramble it — <span class="ex">today have go work to I to is</span> — and meaning collapses.</p>
+          <p>But "rule" means two very different things, and the course cares about the difference.</p>
+
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Descriptive rules</th><th>Prescriptive rules</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>How English <strong>actually works</strong> in real usage — the rules that turn your ~42,000 words into meaning.</td>
+                  <td>Rules of <strong>"proper" usage</strong> — grammatical etiquette from teachers, editors, and style guides.</td>
+                </tr>
+                <tr>
+                  <td>Studied by linguists. Vary by <strong>community of speakers</strong> and change over time.</td>
+                  <td>e.g. use <span class="ex">whom</span> as an object; <span class="ex">May I…</span> not <span class="ex">Can I…</span>; avoid <span class="ex">her and I</span>.</td>
+                </tr>
+                <tr>
+                  <td><span class="ex">He ran real quick</span> is perfectly grammatical <em>in the communities that speak that way.</em></td>
+                  <td>Socially important, like table manners — but not always logically justified ("soup logic").</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-key"></i> Key idea</div>
+            <p>Who "makes the rules"? Mostly <strong>we all do</strong> — speakers, friends, family, influencers, and the prescriptivists. This course mostly "looks under the hood" (descriptive) so you can <em>explain why</em> commas, sentence boundaries, and errors work the way they do — while still writing to the standard (prescriptive) conventions expected in professional and legal work.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Is this a prescriptive or descriptive rule: <em>"Adding <span class="tok">-s</span> makes most nouns plural."</em></span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Descriptive.</span>
+              <p>It describes how English actually behaves — a fact about the language, not an etiquette rule. Compare a <strong>prescriptive</strong> rule like "use <em>whom</em> rather than <em>who</em> for an object," which tells you what is considered "proper."</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 2 -->
+      <details class="topic" id="proofreading">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
+            <h2 class="sec-title">2 · Why proofreading is hard (and how to do it)</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>Proofreading your own writing is hard for real reasons:</p>
+          <ul>
+            <li><strong>Your brain auto-corrects.</strong> You can read <span class="ex">the olny iprmoatnt tihng is taht the frist and lsat ltteer are in the rghit pcale</span> with no trouble — so your eyes glide over real errors too.</li>
+            <li><strong>English is inconsistent.</strong> It borrows spelling and rules from Latin, French, Greek and more, so patterns don't always hold.</li>
+            <li><strong>Spellcheck misses things.</strong> Microsoft Word doesn't catch every error, especially the ones that are real words in the wrong place.</li>
+          </ul>
+          <div class="callout watch">
+            <div class="c-label"><i class="ti ti-alert-triangle"></i> Why it matters</div>
+            <p>In legal and official documents, a tiny mark changes meaning. In the <strong>Oakhurst Dairy</strong> case, a missing comma (the Oxford comma) in an overtime law cost the company millions. Punctuation is not decoration.</p>
+          </div>
+
+          <h3>Proofreading techniques</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Technique</th><th>Why it works</th></tr></thead>
+              <tbody>
+                <tr><td>Read slowly and <strong>aloud</strong>, or use text-to-speech</td><td>Forces you to process every word instead of skimming.</td></tr>
+                <tr><td>Read it <strong>backward</strong>, word by word</td><td>Breaks your brain's autocorrect by removing the meaning/flow.</td></tr>
+                <tr><td>Change the font, size, or layout; <strong>print</strong> it</td><td>Makes familiar text look new so errors resurface.</td></tr>
+                <tr><td>Use a ruler / highlight one line at a time</td><td>Stops your eye from jumping ahead.</td></tr>
+                <tr><td>Circle every punctuation mark</td><td>Isolates commas, periods, and quotes for checking.</td></tr>
+                <tr><td>Step away, then review later</td><td>Distance restores your ability to see the page freshly.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-robot"></i> On AI &amp; spellcheckers</div>
+            <p>AI tools can help, but they <strong>miss real errors, give inconsistent results, and even "hallucinate" errors that aren't there</strong> — and they may quietly apply US conventions. Don't rely on them for complex or legal documents. Use them as a second pass, never the only pass.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which single technique is best aimed at defeating your brain's tendency to auto-correct as you read?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Reading the text backward, word by word.</span>
+              <p>Removing the normal flow of meaning stops your brain from "filling in" what it expects to see, so misspellings and wrong words stand out. Reading aloud / text-to-speech helps for the same reason.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 3 -->
+      <details class="topic" id="errors">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-1">Week 1</span> Foundations</div>
+            <h2 class="sec-title">3 · Common error types to hunt for</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <h3>Confusing words</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Type</th><th>Definition</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Homophones</strong></td><td>Sound the same; different meaning and/or spelling</td><td class="mono">your / you're · their / there / they're</td></tr>
+                <tr><td><strong>Homographs</strong></td><td>Spelled the same; different meaning and/or pronunciation</td><td class="mono">read (present) / read (past)</td></tr>
+                <tr><td><strong>Homonyms</strong></td><td>Same spelling <em>and</em> sound; different meaning</td><td class="mono">ring (jewelry) / ring (call)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Spelling &amp; letters</h3>
+          <ul>
+            <li><strong>Reversed / dropped letters</strong> — e.g. <span class="ex">form</span> vs <span class="ex">from</span>, <span class="ex">trial</span> vs <span class="ex">trail</span>.</li>
+            <li><strong>EI vs. IE</strong> — "i before e, except after c": <mark class="good">rec<strong>ei</strong>ve</mark>, <mark class="good">bel<strong>ie</strong>ve</mark> (with plenty of exceptions, so verify).</li>
+            <li><strong>Hyphenated / compound words</strong> — a <em>compound adjective</em> before a noun takes a hyphen: a <span class="ex">human-like voice</span> (the hyphen ties <em>human</em> + <em>like</em> together to modify <em>voice</em>). Without it the meaning blurs.</li>
+            <li><strong>Capitalization</strong> — proper nouns, titles, and sentence starts; watch style-guide rules for capitalization after a colon.</li>
+          </ul>
+
+          <h3>Canadian vs. American vs. British spelling</h3>
+          <p class="sub">Canadian English is a mix: it usually keeps British <span class="tok">-our</span> and <span class="tok">-re</span>, but takes American <span class="tok">-ize</span> and some American words.</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>American</th><th>British</th><th>Canadian</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">color</td><td class="mono">colour</td><td class="mono">colour</td></tr>
+                <tr><td class="mono">apologize</td><td class="mono">apologise</td><td class="mono">apologize</td></tr>
+                <tr><td class="mono">tire</td><td class="mono">tyre</td><td class="mono">tire</td></tr>
+                <tr><td class="mono">gray</td><td class="mono">grey</td><td class="mono">grey</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-quote"></i> Punctuation &amp; style consistency</div>
+            <p>Style guides disagree, so pick one and stay consistent. For example, <strong>American</strong> style puts commas/periods <em>inside</em> quotation marks (<span class="ex">"Her,"</span>); <strong>British</strong> style often puts them <em>outside</em> (<span class="ex">"Her",</span>). Guides also differ on the Oxford comma and on italics vs. quotation marks for titles.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which is the correct <strong>Canadian</strong> spelling: <em>color, colour,</em> or <em>coler</em>? And is it <em>apologize</em> or <em>apologise</em>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">colour · apologize</span>
+              <p>Canadian keeps the British <span class="tok">-our</span> ending (<em>colour</em>) but uses the American-style <span class="tok">-ize</span> ending (<em>apologize</em>). That mix is exactly what trips people up.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 4 -->
+      <details class="topic" id="pos">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+            <h2 class="sec-title">4 · Parts of speech &amp; how to categorize a word</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>Every word gets filed into a <strong>word class</strong> (part of speech). This course uses an eight-class scheme (plus interjections). Schemes differ between grammars — categorizing 170,000 words is like sorting paint chips into "red, orange, yellow…": the boundaries are a bit arbitrary, so some words sit on the line.</p>
+
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Class</th><th>Example</th><th>Class</th><th>Example</th></tr></thead>
+              <tbody>
+                <tr><td>Noun</td><td class="mono">student</td><td>Determiner (determinative)</td><td class="mono">the</td></tr>
+                <tr><td>Pronoun</td><td class="mono">they</td><td>Preposition</td><td class="mono">under</td></tr>
+                <tr><td>Verb</td><td class="mono">learn</td><td>Subordinator</td><td class="mono">because</td></tr>
+                <tr><td>Adjective</td><td class="mono">precise</td><td>Coordinator</td><td class="mono">and</td></tr>
+                <tr><td>Adverb</td><td class="mono">carefully</td><td>Interjection</td><td class="mono">wow</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>The four clues</h3>
+          <p>Don't rely on meaning alone. Combine these, and always check the word in context:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Clue</th><th>Ask</th><th>Signals</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Meaning</strong></td><td>What does it express?</td><td>Often useful, <em>never enough on its own.</em></td></tr>
+                <tr><td><strong>Form</strong></td><td>What endings can it take?</td><td class="mono">plural -s · possessive -'s · -ly · -ous · -er/-est</td></tr>
+                <tr><td><strong>Position</strong></td><td>Where can it sit?</td><td>after a determiner; before a noun; etc.</td></tr>
+                <tr><td><strong>Context</strong></td><td>What's around it?</td><td>the whole sentence settles it.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-brain"></i> Your "grammar brain" already knows this</div>
+            <p>Read: <span class="ex">The froominous meeps garkel voominously.</span> You can label every made-up word without knowing what any of them mean:</p>
+            <p style="margin-top:6px;"><span class="tok">froominous</span> = adjective · <span class="tok">meeps</span> = noun · <span class="tok">garkel</span> = verb · <span class="tok">voominously</span> = adverb — proved by <strong>position and form</strong>, not meaning.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>In <em>The froominous meeps garkel voominously</em>, what part of speech is <strong>garkel</strong> — and what tells you?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">A verb.</span>
+              <p>Position: it comes right after the noun phrase <em>the froominous meeps</em> (the subject) and is followed by an <span class="tok">-ly</span> adverb, <em>voominously</em>. That's the slot only a verb can fill — no meaning required.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 5 -->
+      <details class="topic" id="catfun">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+            <h2 class="sec-title">5 · Category vs. function</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>A giant screwdriver used to pry open paint cans is <em>categorically</em> a screwdriver but <em>functionally</em> a prybar. Words work the same way: a word's <strong>category</strong> (its word class) can differ from its <strong>function</strong> (the job it does in a sentence).</p>
+          <div class="example">
+            <div class="ex-line">There must be a <mark>dog</mark> trainer who can teach Rex to roll over.</div>
+            <div class="ex-note"><em>dog</em> is <strong>categorically a noun</strong>, but here it is <strong>functioning as an adjective</strong> (an <em>adjectival</em>) — describing <em>trainer</em>.</div>
+          </div>
+
+          <p>Because a word can be one thing but do another, we give the functions their own names:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Category (word class)</th><th>Function name</th></tr></thead>
+              <tbody>
+                <tr><td>Noun</td><td>Nominal</td></tr>
+                <tr><td>Adjective</td><td>Adjectival</td></tr>
+                <tr><td>Adverb</td><td>Adverbial</td></tr>
+                <tr><td>Determinative</td><td>Determiner</td></tr>
+                <tr><td>Verb · Pronoun · Coordinator · Subordinator</td><td class="no">— (no separate function name: only they can do their job)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Function names shine with <strong>phrases</strong>, not just words: in <span class="ex">The sasquatch <mark>in the shed</mark> is asking for a snack</span>, the phrase <em>in the shed</em> describes the sasquatch — it's an <strong>adjectival</strong>, even though it contains no adjective. So the more useful question in this course is <strong>"what is this word or phrase <em>doing</em>?"</strong> rather than "what class is it?"</p>
+
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-arrows-shuffle"></i> Words drift</div>
+            <p>Categories aren't frozen. <em>Adult</em> (noun) now works as a verb (<span class="ex">I have to adult today</span>); <em>access</em> became a verb in the computer age. Speakers and influencers move words between classes over time.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which of these has <strong>no</strong> separate function name (because only it can do its job): noun, adjective, or verb?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Verb.</span>
+              <p>Nouns → <em>nominal</em> and adjectives → <em>adjectival</em>, but only a verb can do a verb's job — so there's no "verbal" function slot other constituents can step into. (Pronouns, coordinators, and subordinators are the same.)</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 6 -->
+      <details class="topic" id="posts">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+            <h2 class="sec-title">6 · POSTs — Parts-of-Speech Tests</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>A <strong>POST</strong> is a sentence pattern with one controlled blank. Your grammar brain only allows certain words into the slot, so the pattern <em>tests</em> how a word can function — without you having to define anything first. Fill <span class="ex">She <span class="slot"></span> friendly</span> and you'll only ever reach for a <strong>linking verb</strong> (<em>is, seems, sounds</em>), never <em>jumps</em>.</p>
+
+          <p class="sub">The four core POSTs from class, plus two more from the reading:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>To find a…</th><th>POST (fill the blank)</th><th>Words that fit</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Noun</strong></td><td class="mono">My <span class="slot"></span> is / are important.</td><td>studies, health, curiosity, skiing, to learn</td></tr>
+                <tr><td><strong>Linking verb</strong></td><td class="mono">She <span class="slot"></span> friendly.</td><td>is, seems, sounds</td></tr>
+                <tr><td><strong>Intransitive verb</strong></td><td class="mono">She <span class="slot"></span> expertly.</td><td>sings, swims, performs</td></tr>
+                <tr><td><strong>Transitive verb</strong></td><td class="mono">She <span class="slot"></span> groceries frequently.</td><td>buys, carries, orders</td></tr>
+                <tr><td><strong>Determiner</strong> (mostly)</td><td class="mono"><span class="slot"></span> pretty flowers grew on the hill.</td><td>a, the, one, ten, many, some</td></tr>
+                <tr><td><strong>Preposition</strong> (mostly)</td><td class="mono">The squirrel <span class="slot"></span> the tree is annoyed.</td><td>in, on, under, behind</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-bulb"></i> How to read a POST result</div>
+            <p>A successful POST proves a <strong>possible function in context</strong>, not a permanent identity. One word can pass several: <em>turned</em> fits linking, intransitive, <em>and</em> transitive; <em>owe</em> only fits transitive. There are <strong>no reliable POSTs</strong> for pronouns, coordinators, or subordinators — and the noun POST is just the linking-verb pattern with the <em>noun</em> left blank.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which word does <strong>not</strong> fit the noun POST <em>"My <span class="slot"></span> is/are important"</em>: <em>studies, quickly, skiing, health</em>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">quickly.</span>
+              <p><em>quickly</em> is an adverb and your grammar brain refuses it in that slot. <em>studies</em> and <em>health</em> are nouns; <em>skiing</em> fits too — but note it's a <strong>nominal</strong> (a verb form doing a noun's job), which is the next topic.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 7 -->
+      <details class="topic" id="heads">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+            <h2 class="sec-title">7 · Heads &amp; dependents</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>Inside a phrase, one word is the boss:</p>
+          <ul>
+            <li>The <strong>head</strong> is the central word that determines what kind of phrase it is.</li>
+            <li>A <strong>dependent</strong> is a word or group that adds to, completes, or limits the head. Remove the head and the phrase loses its anchor.</li>
+          </ul>
+          <div class="example">
+            <div class="ex-line">the · remarkably patient · <mark>student</mark> · near the window</div>
+            <div class="ex-note"><strong>Head:</strong> <em>student</em>. <strong>Dependents:</strong> <em>the</em>, <em>remarkably patient</em>, <em>near the window</em>. Note that <em>remarkably</em> depends on <em>patient</em> — not on <em>student</em>. Dependents can have dependents of their own, and a dependent can be a whole phrase.</div>
+          </div>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-scissors-off"></i> The payoff — a comma rule</div>
+            <p><strong>Never separate a head from its dependent with a comma.</strong> That single rule explains the two wrong commas in:</p>
+            <p class="ex" style="margin-top:6px;">Chinook Lodge will be hosting the first<mark class="bad">,</mark> in what we hope will be a series<mark class="bad">,</mark> of workshops…</p>
+            <p>The commas cut the head <em>first</em> off from its dependent <em>in what we hope will be a series of workshops</em>. By the end of the course, you'll be able to name and fix errors like this.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>In <em>"the remarkably patient student near the window,"</em> what is the head, and what does <em>remarkably</em> depend on?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Head = student; remarkably depends on patient.</span>
+              <p>The phrase is about a <em>student</em>, so <em>student</em> is the head. <em>remarkably</em> modifies the adjective <em>patient</em> (how patient?), which in turn depends on <em>student</em> — a small chain of dependents.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 8 -->
+      <details class="topic" id="nouns">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+            <h2 class="sec-title">8 · Nouns &amp; nominals</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>The old "person, place, or thing" is too narrow. A <strong>noun</strong> can express far more kinds of "thing":</p>
+          <ul>
+            <li>People &amp; places — <span class="ex">Janelle, Calgary, SAIT</span></li>
+            <li>Physical entities — <span class="ex">hamster, rainbow, crash</span></li>
+            <li>Activities — <span class="ex">bowling, golf, badminton</span></li>
+            <li>Concepts &amp; qualities — <span class="ex">science, rigour, softness</span></li>
+            <li>Mental processes — <span class="ex">dreams, worries, love, boredom</span></li>
+          </ul>
+          <p><strong>Form &amp; position clues:</strong> most nouns have singular/plural forms and can take a possessive <span class="tok">-'s</span>; they often follow a determiner and head a noun phrase. You know <span class="ex">that merp likes the look of you</span> makes <em>merp</em> a noun purely from its position — even with no idea what a merp is.</p>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-transform"></i> Nominals: non-nouns in a noun's slot</div>
+            <p>A <strong>nominal</strong> is a word or phrase that isn't a word-class noun but <em>functions</em> in a noun slot. They all pass the noun POST and can be replaced by <em>it</em>:</p>
+            <p style="margin-top:6px;"><span class="ex">My <strong>laptop</strong> is important.</span> (noun) · <span class="ex"><strong>Skiing</strong> is important.</span> (gerund) · <span class="ex"><strong>To learn</strong> is important.</span> (to-infinitive) · <span class="ex"><strong>That you remembered my birthday</strong> is important.</span> (whole clause)</p>
+            <p style="margin-top:6px;">A <strong>gerund</strong> is the <span class="tok">-ing</span> form doing a noun's job (<em>skiing, singing</em>).</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>In <em>"Skiing is important,"</em> what is <strong>skiing</strong> — a verb, a noun, or a nominal? Why?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">A nominal (specifically a gerund).</span>
+              <p><em>Skiing</em> is built from a verb (<em>ski</em> + <span class="tok">-ing</span>), so it isn't a word-class noun — but it fills the subject/noun slot (it passes <em>"My ___ is important"</em> and can be replaced by <em>it</em>). A verb form doing a noun's job = a nominal.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <!-- 9 -->
+      <details class="topic" id="verbs">
+        <summary>
+          <div class="topic-head">
+            <div class="sec-eyebrow"><span class="wk wk-2">Week 2</span> The sentence</div>
+            <h2 class="sec-title">9 · Verb forms &amp; the jobs they do</h2>
+          </div>
+          <i class="ti ti-chevron-down topic-caret"></i>
+        </summary>
+        <div class="topic-body">
+          <p>Every verb has a set of forms (its <em>paradigm</em>) — think of it as a closet of uniforms the verb changes into for different jobs. The verb <em>show</em> has five:</p>
+
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Form</th><th>Name</th><th>Main jobs it can do</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">show</td><td>plain (base)</td><td>present tense · agreement (I/you/we/they) · after a modal (<em>can show</em>) · to-infinitive (<em>to show</em>)</td></tr>
+                <tr><td class="mono">shows</td><td>-s / third-person singular</td><td>present tense <strong>+</strong> agreement with he/she/it &amp; singular nouns</td></tr>
+                <tr><td class="mono">showed</td><td>preterite (-ed)</td><td>simple past tense</td></tr>
+                <tr><td class="mono">shown</td><td>past participle (-en)</td><td>perfect verb strings (<em>have shown</em>) · adjectival (<em>the paintings shown…</em>)</td></tr>
+                <tr><td class="mono">showing</td><td>present participle / gerund (-ing)</td><td>progressive verb strings (<em>is showing</em>) · gerund/nominal · participle/modifier</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Three things verb forms handle</h3>
+          <ul>
+            <li><strong>Tense.</strong> English changes <em>form</em> for only two tenses — <strong>simple present</strong> and <strong>simple past</strong>. Everything else uses a <strong>verb string</strong> (more than one verb): <span class="ex">will show</span>, <span class="ex">have shown</span>, <span class="ex">is showing</span>, <span class="ex">will have been waiting</span> (four verbs!).</li>
+            <li><strong>Agreement.</strong> Only the <span class="tok">-s</span> form marks it, and it agrees with <em>he/she/it</em> and singular nouns. (There is no such thing as a "plural verb," and the <span class="tok">-s</span> on a verb is <em>not</em> the plural <span class="tok">-s</span> on a noun.) The verb <em>be</em> is the exception — 8 forms, and 5 that show agreement: <em>am, is, are, was, were</em>.</li>
+            <li><strong>"Non-verb" jobs.</strong> The <span class="tok">-ing</span> form can be a gerund (nominal) or a participle (adjectival/adverbial); the <span class="tok">-en</span> form can be adjectival; and plain + <em>to</em> makes a to-infinitive that acts as a nominal, adjectival, or adverbial.</li>
+          </ul>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Name the preterite of <em>show</em>, and say which form ends the <strong>perfect</strong> tenses (as in <em>"have ___"</em>).</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Preterite = showed · Perfect uses the past participle = shown.</span>
+              <p><em>showed</em> is the simple past (<em>I showed you</em>). The perfect tenses are built with a verb string ending in the past participle / <span class="tok">-en</span> form: <em>have <strong>shown</strong>, has <strong>shown</strong></em>. In <em>"the paintings <strong>shown</strong> in the gallery,"</em> that same <em>shown</em> is instead doing a non-verb job — an <strong>adjectival</strong>.</p>
+            </div></div>
+          </details>
+        </div>
+      </details>
+
+      <div class="foot-note">
+        <p><strong>Want to be quizzed and drill your weak spots?</strong> Open the same material in the <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener">Study Tutor</a> — it turns these notes into Teach-me, cited Q&amp;A, Quiz-me (tracked per topic), and flashcards.</p>
+        <p style="margin-top:8px;" class="no-print">Notes cover ENGL 205 Weeks 1–2, based on the course readings and lecture material. Print or "Save as PDF" from the button up top for an offline study guide. More weeks will be added as they're taught.</p>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // ---- Theme (matches the schedule page) --------------------------------
+  function currentTheme() {
+    var explicit = document.documentElement.getAttribute("data-theme");
+    if (explicit) return explicit;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function renderThemeIcon() {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.innerHTML = currentTheme() === "dark" ? '<i class="ti ti-sun"></i>' : '<i class="ti ti-moon"></i>';
+  }
+  function toggleTheme() {
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+    renderThemeIcon();
+  }
+  renderThemeIcon();
+  if (window.matchMedia) {
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderThemeIcon);
+  }
+
+  // ---- Expand / collapse all topics -------------------------------------
+  (function () {
+    var btn = document.getElementById("expand-all");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var topics = document.querySelectorAll("details.topic");
+      var anyClosed = Array.prototype.some.call(topics, function (d) { return !d.open; });
+      topics.forEach(function (d) { d.open = anyClosed; });
+      btn.innerHTML = anyClosed
+        ? '<i class="ti ti-arrows-minimize"></i> Collapse all'
+        : '<i class="ti ti-arrows-diagonal"></i> Expand all';
+    });
+  })();
+
+  // ---- Open a topic from the TOC (and on load from the hash) ------------
+  function openTopic(id, scroll) {
+    var t = document.getElementById(id);
+    if (!t || t.tagName.toLowerCase() !== "details") return;
+    t.open = true;
+    if (scroll) t.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  document.querySelectorAll(".toc-body a").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href").slice(1);
+      e.preventDefault();
+      openTopic(id, true);
+      history.replaceState(null, "", "#" + id);
+      var toc = document.getElementById("toc");
+      if (toc) { toc.classList.remove("open"); }
+    });
+  });
+  if (location.hash.length > 1) openTopic(location.hash.slice(1), true);
+
+  // ---- Mobile TOC toggle -------------------------------------------------
+  (function () {
+    var toggle = document.getElementById("toc-toggle");
+    var toc = document.getElementById("toc");
+    if (!toggle || !toc) return;
+    toggle.addEventListener("click", function () {
+      var open = toc.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  })();
+
+  // ---- Scroll-spy: highlight the current topic in the TOC --------------
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-body a"));
+    if (!links.length || !("IntersectionObserver" in window)) return;
+    var map = {};
+    links.forEach(function (a) {
+      var id = a.getAttribute("href").slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (a) { a.classList.remove("active"); });
+          var a = map[e.target.id];
+          if (a) a.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-30% 0px -60% 0px", threshold: 0 });
+    Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
+  })();
+</script>
+</body>
+</html>

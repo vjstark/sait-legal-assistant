@@ -130,6 +130,30 @@
       margin: 0 auto;
     }
 
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+    .site-nav a {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: background .15s, color .15s;
+    }
+    .site-nav a i { font-size: 15px; }
+    .site-nav a:hover { color: var(--accent-text); background: var(--accent-bg); }
+    .site-nav a.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -731,6 +755,11 @@
 </head>
 <body>
 <div class="container">
+  <nav class="site-nav">
+    <a href="./" class="active"><i class="ti ti-calendar-week"></i> Schedule</a>
+    <a href="notes/"><i class="ti ti-notebook"></i> Notes</a>
+    <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener"><i class="ti ti-school"></i> Tutor</a>
+  </nav>
   <header class="topbar">
     <div>
       <h1>Legal Assistant — Fall 2026 Schedule</h1>
