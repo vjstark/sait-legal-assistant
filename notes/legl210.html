@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>LEGL 210 Notes — Introduction to Corporate Law</title>
+  <meta name="description" content="Study notes for SAIT LEGL 210 (Introduction to Corporate Law), Unit 1 Business Structures: sole proprietorships, partnerships (and LP/LLP), and corporations — liability, profits, governance, and taxation." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="../assets/notes.css?v=3" />
+</head>
+<body>
+<div class="container">
+
+  <nav class="site-nav">
+    <a href="../"><i class="ti ti-calendar-week"></i> Schedule</a>
+    <a href="./" class="active"><i class="ti ti-notebook"></i> Notes</a>
+    <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener"><i class="ti ti-school"></i> Tutor</a>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">SAIT Legal Assistant · Course Notes</div>
+    <h1>LEGL 210 — Introduction to Corporate Law</h1>
+    <p class="lede"><strong>Unit 1: Business Structures.</strong> How you structure a business decides who is liable, who shares the profits, and who runs it. This covers the three structures — <strong>sole proprietorship, partnership</strong> (plus LP &amp; LLP), and the <strong>corporation</strong> — and why liability is the deciding factor. Pick a topic from the contents; each ends with a quick self-check.</p>
+    <div class="toc-tools" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i> Print / Save PDF (all topics)</button>
+    </div>
+  </header>
+
+  <div class="mobilebar" id="mobilebar">
+    <button class="mb-menu" id="mb-menu" aria-label="Open contents"><i class="ti ti-list"></i> Contents</button>
+    <span class="mb-current" id="mb-current">1 · Why structure matters</span>
+  </div>
+
+  <div class="notes-layout">
+
+    <aside class="toc" id="toc" aria-label="Table of contents">
+      <button class="toc-close" id="toc-close"><i class="ti ti-x"></i> Close</button>
+      <div class="toc-body">
+        <h2>The three structures</h2>
+        <a href="#overview">1 · Why structure matters</a>
+        <a href="#sole">2 · Sole proprietorship</a>
+        <a href="#partnership">3 · Partnership</a>
+        <a href="#lp-llp">4 · Limited partnerships &amp; LLPs</a>
+        <h2>Corporations</h2>
+        <a href="#corporation">5 · The corporation</a>
+        <a href="#governance">6 · Governance &amp; dividends</a>
+        <a href="#features">7 · Features &amp; trade-offs</a>
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <!-- 1 -->
+      <section class="topic active" id="overview">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Unit 1</span> The three structures</div>
+          <h2 class="sec-title">1 · Why business structure matters</h2>
+        </div>
+        <div class="topic-body">
+          <p>How a business is <strong>structured</strong> determines four things:</p>
+          <ul>
+            <li>Who is <strong>liable</strong> for the business's torts, contracts, and debts;</li>
+            <li>Who collects a share of the <strong>profits</strong> or assets;</li>
+            <li>Who <strong>manages</strong> the business; and</li>
+            <li>Who is <strong>accountable</strong> for its management and performance.</li>
+          </ul>
+          <p>There are three general ways to structure a business:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Structure</th><th>Separate legal entity?</th><th>Owner liability</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Sole proprietorship</strong></td><td class="no">No</td><td><strong>Unlimited</strong> personal liability</td></tr>
+                <tr><td><strong>Partnership</strong></td><td class="no">No</td><td><strong>Unlimited</strong>, joint &amp; several</td></tr>
+                <tr><td><strong>Corporation</strong></td><td class="yes">Yes</td><td><strong>Limited</strong> (to the value of shares)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-key"></i> The deciding factor</div>
+            <p><strong>Liability</strong> is the biggest consideration. Because a corporation is a <em>separate legal entity</em>, its owners aren't personally on the hook for its debts — which is why incorporating is usually the most advisable way to structure a business.</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which of the three structures is a <strong>separate legal entity</strong>, and why does that matter?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Only the corporation.</span>
+              <p>Because it's a separate legal entity, the corporation — not its shareholders — is liable for its own debts and obligations. Sole proprietors and partners <em>are</em> their businesses, so they carry unlimited personal liability.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="topic" id="sole">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Unit 1</span> The three structures</div>
+          <h2 class="sec-title">2 · Sole proprietorship</h2>
+        </div>
+        <div class="topic-body">
+          <p>A <strong>sole proprietorship</strong> is one person carrying on business in their own name. The owner is <strong>indistinguishable from the business</strong> — it is <em>not</em> a separate legal entity, and there is no line between the owner's assets and the business's assets. Contract with a sole proprietorship and you contract with the <strong>owner personally</strong>.</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Feature</th><th>Sole proprietorship</th></tr></thead>
+              <tbody>
+                <tr><td>Liability</td><td><strong>Unlimited personal liability</strong> — personal assets can be seized to pay business debts</td></tr>
+                <tr><td>Profits</td><td>All after-tax profits belong to the owner</td></tr>
+                <tr><td>Decisions</td><td>Total control (may delegate to employees)</td></tr>
+                <tr><td>Lifespan</td><td>Ends when the owner dies or stops the business</td></tr>
+                <tr><td>Transfer</td><td>Can't be sold or inherited (only the <em>assets</em> can be transferred)</td></tr>
+                <tr><td>Name</td><td>Owner's name by default; may use a <strong>trade name</strong></td></tr>
+                <tr><td>Taxes</td><td>Taxed as <strong>personal income</strong> — usually a higher rate than a corporation</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-scale-outline"></i> Trade-off</div>
+            <p><strong>Simple, cheap, private, and fully in your control</strong> — but the <strong>unlimited liability</strong> means a business failure can mean personal bankruptcy, and it's hard to raise capital or attract talented staff (no ownership stake to offer).</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>A sole proprietor's business is sued and loses. Can the plaintiff go after the owner's personal house?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Yes.</span>
+              <p>With unlimited personal liability and no separate legal entity, the owner's personal assets — including their home — can be seized to satisfy a business debt or damages award.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="topic" id="partnership">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Unit 1</span> The three structures</div>
+          <h2 class="sec-title">3 · Partnership</h2>
+        </div>
+        <div class="topic-body">
+          <p>A <strong>partnership</strong> is <strong>two or more persons carrying on business together with the goal to make a profit</strong>. All three elements — (1) two or more persons, (2) carrying on business together, (3) to make a profit — and a partnership is <strong>automatically deemed to exist</strong>, whether or not the parties intended it.</p>
+          <div class="callout watch">
+            <div class="c-label"><i class="ti ti-alert-triangle"></i> The unintended-partnership trap</div>
+            <p>Because it forms automatically, you can create a partnership without meaning to. Disputes usually erupt over <strong>profits</strong> (each claims a partnership existed to get a share) or <strong>debts</strong> (each denies it to avoid liability). Choose partners carefully.</p>
+          </div>
+          <p>The <strong>Partnership Act</strong> sets the <em>default</em> rules; partners can override many of them with a <strong>Partnership Agreement</strong>.</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Feature</th><th>Default rule (Partnership Act)</th></tr></thead>
+              <tbody>
+                <tr><td>Liability</td><td>Unlimited, and <strong>joint &amp; several</strong> — a plaintiff can sue and collect from one, some, or all partners (you may pay for a partner's wrongdoing, then recover their share)</td></tr>
+                <tr><td>Profits</td><td>Shared <strong>equally</strong> (an agreement can make sharing unequal)</td></tr>
+                <tr><td>Decisions</td><td>Most decisions by <strong>majority vote</strong></td></tr>
+                <tr><td>Dissolution</td><td>Ends on expiry, a partner's notice, or a partner's <strong>death, insanity, or bankruptcy</strong>. On dissolution, assets pay debts first; if short, partners contribute in proportion to their profit share</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Your partner runs up a business debt without you. Can a creditor collect the whole amount from <em>you</em>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Yes — joint &amp; several liability.</span>
+              <p>A creditor can pursue any partner for the full amount. You'd then be entitled to recover the other partners' proportional shares from them — but you're still on the hook to the creditor first. That's why partner choice matters so much.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="topic" id="lp-llp">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Unit 1</span> The three structures</div>
+          <h2 class="sec-title">4 · Limited partnerships &amp; LLPs</h2>
+        </div>
+        <div class="topic-body">
+          <p>Two special partnership subtypes limit liability in different ways:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th></th><th>Limited Partnership (LP)</th><th>Limited Liability Partnership (LLP)</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Who's protected</strong></td><td><strong>Limited partners</strong> have limited liability but <em>cannot</em> take part in management. <strong>General partners</strong> manage and keep <strong>unlimited</strong> liability.</td><td>Every partner is shielded from a <em>fellow partner's</em> negligence.</td></tr>
+                <tr><td><strong>Extent of protection</strong></td><td>Limited partners risk only their investment.</td><td>A partner is liable only for <strong>their own</strong> negligence (and employees directly under them). For <em>other</em> debts, partners are still <strong>jointly &amp; severally</strong> liable.</td></tr>
+                <tr><td><strong>Formed by</strong></td><td>Filing specific paperwork.</td><td>Filing; must carry <strong>liability insurance</strong> for negligence.</td></tr>
+                <tr><td><strong>Typical use</strong></td><td>Passive investors + an active manager.</td><td>Professionals — <strong>lawyers, accountants</strong> — whose biggest risk is a negligence suit.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-bulb"></i> Why an LLP helps professionals</div>
+            <p>In an LLP, one partner's negligence lawsuit doesn't threaten the whole firm — each partner answers only for their own negligence. But breach of contract and other debts still expose partners fully.</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>In an LLP law firm, Partner A is sued for negligence. Is Partner B's personal wealth at risk for A's negligence?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">No — not for A's negligence.</span>
+              <p>An LLP shields partners from each other's <strong>negligence</strong>, so B isn't personally liable for A's negligence. (B would still be exposed for other kinds of firm debt, which remain joint &amp; several.)</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="topic" id="corporation">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Unit 1</span> Corporations</div>
+          <h2 class="sec-title">5 · The corporation — separate legal entity &amp; limited liability</h2>
+        </div>
+        <div class="topic-body">
+          <p>The <strong>corporation</strong> is the most important modern business structure and works completely differently from the others. Its owners are <strong>shareholders</strong>. (<em>"Corporation" and "company" mean the same thing.</em>)</p>
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-building-bank"></i> A separate legal entity ("corporate personhood")</div>
+            <p>A corporation is treated as its own "person" for many purposes — it can <strong>sue and be sued, enter contracts, commit torts, own property, and pay taxes</strong> in its own name. It is liable for its <em>own</em> debts and obligations.</p>
+          </div>
+          <p><strong>Limited liability:</strong> because the corporation is separate from its owners, shareholders are <strong>not</strong> personally liable for its debts. The most a shareholder can lose is the value of their shares.</p>
+          <div class="example">
+            <div class="ex-line">Kim buys 10 shares of Telus for $200. Telus is later sued for $200 million and owes $500 million in debt.</div>
+            <div class="ex-note">Kim's liability is capped at his <strong>$200</strong> — his shares could drop to $0, but his personal assets are safe.</div>
+          </div>
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-gavel"></i> The landmark case: Salomon v. Salomon</div>
+            <p>Mr. Salomon incorporated his shoe business as <em>Salomon Ltd</em>. When the company became insolvent, its creditors tried to make Mr. Salomon pay its debts. The House of Lords held he was <strong>not liable</strong>: Mr. Salomon and Salomon Ltd were two different legal entities, so only the company's own assets answered for its debts. This separate legal personality is arguably the single most important feature of a corporation.</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>A corporation defaults on a $1M loan. Its sole shareholder has a $2M house. Can the lender seize the house?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">No.</span>
+              <p>Only assets held in the <strong>corporation's</strong> own name can be seized. The shareholder's personal assets are protected by limited liability — the principle confirmed in <em>Salomon v. Salomon</em>.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="topic" id="governance">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Unit 1</span> Corporations</div>
+          <h2 class="sec-title">6 · Governance &amp; dividends</h2>
+        </div>
+        <div class="topic-body">
+          <p>Shareholders <strong>own</strong> the corporation but don't manage it directly. Three roles run it:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Role</th><th>Chosen by</th><th>Job &amp; duty</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Shareholders</strong></td><td>—</td><td>Own shares; elect directors. No inherent right to dividends.</td></tr>
+                <tr><td><strong>Directors</strong></td><td>Elected by shareholders</td><td>Highest level of management; set strategy; <strong>declare dividends</strong>. Owe a <strong>fiduciary duty to the corporation</strong> (its best interest, not shareholders' short-term gains).</td></tr>
+                <tr><td><strong>Officers</strong> (e.g. CEO)</td><td>Appointed by directors</td><td>Run day-to-day operations; are employees; also owe a <strong>fiduciary duty</strong> to the corporation.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>One person can be a shareholder, director, <em>and</em> officer. <strong>Regular employees do not owe a fiduciary duty</strong> — only directors and officers do.</p>
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-cash"></i> Dividends: a right that switches on</div>
+            <p>Shareholders make money two ways: the <strong>share price rising</strong>, or <strong>dividends</strong>. Shareholders have <em>no</em> right to a dividend until the <strong>directors declare</strong> one (in writing). Once declared, the right activates and they can collect; once paid, it switches off until directors declare again. Some corporations never pay dividends.</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>You own shares but got no dividend this year. Can you force the company to pay one? Who do directors' duties run to?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">No — and directors owe their duty to the corporation.</span>
+              <p>Dividends are only owed once <strong>declared by the directors</strong>; there's no inherent right to them. Directors owe a <strong>fiduciary duty to the corporation itself</strong>, not to shareholders' short-term interests.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section class="topic" id="features">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Unit 1</span> Corporations</div>
+          <h2 class="sec-title">7 · Corporate features &amp; trade-offs</h2>
+        </div>
+        <div class="topic-body">
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Feature</th><th>What it means</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Perpetual existence</strong></td><td>Being a separate legal entity with transferable shares, a corporation exists <em>until it is dissolved</em> — it doesn't die with an owner.</td></tr>
+                <tr><td><strong>Share transfer</strong></td><td><strong>Public</strong> corporations: shares are freely bought, sold, and gifted. <strong>Private</strong> corporations: a <strong>shareholder agreement</strong> restricts transfers.</td></tr>
+                <tr><td><strong>Equity financing</strong></td><td>The corporation can <strong>issue more shares</strong> to raise capital — no repayment obligation, unlike a loan.</td></tr>
+                <tr><td><strong>Naming</strong></td><td>Requires checking name <strong>availability</strong> across jurisdictions and against trademarks.</td></tr>
+                <tr><td><strong>Double taxation</strong></td><td>Dividends are taxed <strong>twice</strong>: at the (low) corporate rate, then again at the shareholder's (higher) personal rate. Low corporate rates encourage <em>reinvestment</em> over payout.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-checkbox"></i> The bottom line</div>
+            <p>Corporations carry more regulation and complexity, but usually offer a <strong>net benefit</strong>. The headline advantage is <strong>limited liability</strong>, plus flexible ownership, perpetual existence, and easier access to capital.</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>What is "double taxation," and what's the corporation's single biggest advantage?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Profits taxed at the corporate rate, then dividends taxed again personally — and the biggest advantage is limited liability.</span>
+              <p>The corporation pays tax on its profits; when it distributes dividends, shareholders pay personal tax on them too. Despite that and the added complexity, <strong>limited liability</strong> (shareholders aren't personally on the hook) is the corporation's defining benefit.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <div class="foot-note">
+        <p><strong>Want to be quizzed and drill your weak spots?</strong> Open the same material in the <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener">Study Tutor</a> for Teach-me, cited Q&amp;A, Quiz-me, and flashcards.</p>
+        <p style="margin-top:8px;" class="no-print">Notes summarize LEGL 210 Unit 1 (Business Structures), based on the course unit notes and Lectures 1–2. They are a study aid, not legal advice or a substitute for class. More units will be added as they're taught.</p>
+      </div>
+
+      <section class="comments" id="comments">
+        <h2>Comments &amp; corrections</h2>
+        <p class="comments-sub">Spot a mistake or want to add something? <strong>Sign in with GitHub to post</strong> — everyone can read. Comments are stored as GitHub Discussions on the repo.</p>
+        <div id="giscus-container"></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toc-backdrop" id="toc-backdrop"></div>
+
+<script src="../assets/notes.js?v=1"></script>
+</body>
+</html>

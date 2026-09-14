@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>LEGA 215 Notes — Legal Computer Applications</title>
+  <meta name="description" content="Study notes for SAIT LEGA 215 (Legal Computer Applications), Module 1 — Operating System basics: OS vs. applications, the desktop and windows, dialog boxes and the Ribbon, mouse and keyboard, and keyboard shortcuts." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="../assets/notes.css?v=3" />
+</head>
+<body>
+<div class="container">
+
+  <nav class="site-nav">
+    <a href="../"><i class="ti ti-calendar-week"></i> Schedule</a>
+    <a href="./" class="active"><i class="ti ti-notebook"></i> Notes</a>
+    <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener"><i class="ti ti-school"></i> Tutor</a>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">SAIT Legal Assistant · Course Notes</div>
+    <h1>LEGA 215 — Legal Computer Applications</h1>
+    <p class="lede"><strong>Module 1: Operating System basics.</strong> The building blocks you'll use in every other module — what an operating system is, how to work with windows and controls, and the mouse/keyboard shortcuts that make you fast. Pick a topic from the contents; each ends with a quick self-check. More modules will be added as they're taught.</p>
+    <div class="toc-tools" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i> Print / Save PDF (all topics)</button>
+    </div>
+  </header>
+
+  <div class="mobilebar" id="mobilebar">
+    <button class="mb-menu" id="mb-menu" aria-label="Open contents"><i class="ti ti-list"></i> Contents</button>
+    <span class="mb-current" id="mb-current">1 · OS vs. applications</span>
+  </div>
+
+  <div class="notes-layout">
+
+    <aside class="toc" id="toc" aria-label="Table of contents">
+      <button class="toc-close" id="toc-close"><i class="ti ti-x"></i> Close</button>
+      <div class="toc-body">
+        <h2>Module 1 · Operating System</h2>
+        <a href="#os">1 · OS vs. applications</a>
+        <a href="#desktop">2 · The desktop &amp; windows</a>
+        <a href="#controls">3 · Dialog boxes, Ribbon &amp; menus</a>
+        <a href="#input">4 · Mouse &amp; keyboard</a>
+        <a href="#shortcuts">5 · Keyboard shortcuts</a>
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <!-- 1 -->
+      <section class="topic active" id="os">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Module 1</span> Operating System</div>
+          <h2 class="sec-title">1 · Operating system vs. applications</h2>
+        </div>
+        <div class="topic-body">
+          <p>An <strong>operating system (OS)</strong> is the program that <strong>manages all the activities on a computer</strong> — saving, printing, screen settings, keyboard/mouse settings, memory, and performance. It starts the computer and runs every other program. You don't type letters or draw in the OS itself.</p>
+          <p>An <strong>application</strong> is a program you use to get specific work done. The OS runs the applications.</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Operating systems</th><th>Applications</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">Windows, macOS, Linux, Unix, MS-DOS</td><td class="mono">Word, Excel, PowerPoint, Outlook, File Explorer, Paint, Media Player, Calculator</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-windows"></i> Multitasking</div>
+            <p>Windows runs several programs at once. Switch between them with <span class="tok">ALT + TAB</span>, or click the program's button on the <strong>taskbar</strong> (which shows what's currently active).</p>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Is <em>Outlook</em> an operating system or an application? What about <em>Windows</em>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Outlook = application; Windows = operating system.</span>
+              <p>Windows is the OS that starts the computer and runs everything; Outlook is an email <em>application</em> that runs on top of it.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="topic" id="desktop">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Module 1</span> Operating System</div>
+          <h2 class="sec-title">2 · The desktop &amp; working with windows</h2>
+        </div>
+        <div class="topic-body">
+          <h3>Elements of the desktop</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Element</th><th>What it is</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Desktop</strong></td><td>The background/workspace shown at start-up</td></tr>
+                <tr><td><strong>Start button/screen</strong></td><td>Log in/out and open your most-used programs</td></tr>
+                <tr><td><strong>Icons</strong></td><td>Pictures that represent programs and actions</td></tr>
+                <tr><td><strong>Taskbar</strong></td><td>Access programs and settings; usually along the bottom or side</td></tr>
+                <tr><td><strong>Notification area</strong></td><td>Shows what's running in the background</td></tr>
+                <tr><td><strong>Date/Time</strong></td><td>Should be kept current (can be reset)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Window techniques &amp; controls</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Technique</th><th>Does</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Minimize</strong></td><td>Shrinks the window to the taskbar, app stays active</td></tr>
+                <tr><td><strong>Maximize</strong></td><td>Fills the whole screen</td></tr>
+                <tr><td><strong>Restore</strong></td><td>Returns the window to its pre-maximized size</td></tr>
+                <tr><td><strong>Close</strong></td><td>Closes the window (<span class="tok">ALT + F4</span>)</td></tr>
+                <tr><td><strong>Size / Move</strong></td><td>Drag an edge/corner to resize; drag the <strong>Title Bar</strong> to move</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="sub">Window parts: the <strong>Title Bar</strong> (names the program, holds the close button), <strong>Menu Bar</strong> (all commands), <strong>Toolbar</strong> (shortcuts to menu items), <strong>Status Bar</strong> (messages about what's happening), and the <strong>Workspace</strong> (where you do the work).</p>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>You want a window off your screen but still running so you can return to it. Minimize, maximize, or close?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Minimize.</span>
+              <p>Minimize reduces the window to the taskbar while keeping the application <strong>active</strong>. Close (<span class="tok">ALT + F4</span>) would quit it; maximize would make it full-screen.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="topic" id="controls">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Module 1</span> Operating System</div>
+          <h2 class="sec-title">3 · Dialog boxes, the Ribbon &amp; menu conventions</h2>
+        </div>
+        <div class="topic-body">
+          <h3>Dialog box controls</h3>
+          <ul>
+            <li><strong>Navigate</strong> with <span class="tok">TAB</span> (forward) and <span class="tok">SHIFT + TAB</span> (back).</li>
+            <li><strong>Option (radio) buttons</strong> — pick one; the rest switch off. <strong>Check boxes</strong> — turn each on/off independently.</li>
+            <li><strong>Spin boxes</strong> — arrows rotate through choices. <strong>Text boxes</strong> — type information. <strong>List boxes</strong> — reveal a list of choices.</li>
+          </ul>
+
+          <h3>The Ribbon</h3>
+          <p><strong>Tabs</strong> group related features; <strong>Groups</strong> gather related activities within a tab; <strong>Screen Tips</strong> pop up when you hover; a <strong>Dialog Box Launcher</strong> opens the full details for a group.</p>
+
+          <h3>Menu conventions</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Check mark</strong></td><td>Feature is on/off</td></tr>
+                <tr><td><strong>Ellipsis (…)</strong></td><td>Opens a dialog with more choices</td></tr>
+                <tr><td><strong>Triangular arrow ▸</strong></td><td>A submenu follows</td></tr>
+                <tr><td><strong>Greyed-out item</strong></td><td>Not available right now</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>A menu item shows an <strong>ellipsis (…)</strong> next to it. What happens when you click it?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">It opens a dialog box with more choices.</span>
+              <p>The <strong>ellipsis</strong> means "there's more to choose from." (A <em>triangular arrow</em> means a submenu; a <em>greyed-out</em> item isn't currently available.)</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="topic" id="input">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Module 1</span> Operating System</div>
+          <h2 class="sec-title">4 · Mouse &amp; keyboard</h2>
+        </div>
+        <div class="topic-body">
+          <h3>Mouse actions</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Action</th><th>How / what</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Point</strong></td><td>Position the pointer over an object</td></tr>
+                <tr><td><strong>Click</strong></td><td>One press of the primary (left) button</td></tr>
+                <tr><td><strong>Double-click</strong></td><td>Two quick presses of the primary button</td></tr>
+                <tr><td><strong>Right-click</strong></td><td>One press of the secondary (right) button — opens context menus</td></tr>
+                <tr><td><strong>Drag / select</strong></td><td>Hold the button down while moving over text/objects</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Key keys</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Key</th><th>Does</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">ESC</td><td>Exit a menu or stop an action</td></tr>
+                <tr><td class="mono">BACKSPACE</td><td>Erases the character to the <strong>left</strong> of the cursor</td></tr>
+                <tr><td class="mono">DELETE</td><td>Erases the character to the <strong>right</strong> of the cursor</td></tr>
+                <tr><td class="mono">Function keys (F1–F12)</td><td>Pre-assigned tasks (Help, Save…); combine with CTRL/ALT/SHIFT for more</td></tr>
+                <tr><td class="mono">CTRL · ALT · SHIFT</td><td>Modifier keys that "boost" other keys to trigger features</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Your cursor sits between two letters. Which key erases the letter to the <strong>right</strong> — BACKSPACE or DELETE?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">DELETE.</span>
+              <p><span class="tok">DELETE</span> erases to the <strong>right</strong> of the cursor; <span class="tok">BACKSPACE</span> erases to the <strong>left</strong>.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="topic" id="shortcuts">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Module 1</span> Operating System</div>
+          <h2 class="sec-title">5 · Keyboard shortcuts (reference)</h2>
+        </div>
+        <div class="topic-body">
+          <p>Worth memorizing — they make you noticeably faster:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Shortcut</th><th>Does</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">ALT + TAB</td><td>Switch between open programs</td></tr>
+                <tr><td class="mono">ALT + F4</td><td>Close an application window (or shut down)</td></tr>
+                <tr><td class="mono">CTRL + F4</td><td>Close the active window/file</td></tr>
+                <tr><td class="mono">CTRL + A</td><td>Select all</td></tr>
+                <tr><td class="mono">CTRL + ESC</td><td>Open the Start menu</td></tr>
+                <tr><td class="mono">ESC</td><td>Cancel/get out of a procedure</td></tr>
+                <tr><td class="mono">SHIFT + F10</td><td>Show the shortcut (right-click) menu for the selected item</td></tr>
+                <tr><td class="mono">F5</td><td>Refresh the active window</td></tr>
+                <tr><td class="mono">TAB / SHIFT + TAB</td><td>Move forward / back through options</td></tr>
+                <tr><td class="mono">Windows key</td><td>Open the Start menu</td></tr>
+                <tr><td class="mono">Windows + M</td><td>Minimize all open programs (show desktop)</td></tr>
+                <tr><td class="mono">Windows + R</td><td>Open the Run dialog</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Quick: which shortcut <strong>selects everything</strong>, and which <strong>switches between open programs</strong>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">CTRL + A selects all; ALT + TAB switches programs.</span>
+              <p>(And <span class="tok">ALT + F4</span> closes the current application — don't mix it up with <span class="tok">CTRL + F4</span>, which closes just the active file/window.)</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <div class="foot-note">
+        <p><strong>Want to be quizzed and drill your weak spots?</strong> Open the same material in the <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener">Study Tutor</a> for Teach-me, cited Q&amp;A, Quiz-me, and flashcards.</p>
+        <p style="margin-top:8px;" class="no-print">Notes summarize LEGA 215 Module 1 (Operating System Basics) from the course slides. They are a study aid, not a substitute for class. More modules (email, word processing, e-signatures, and more) will be added as they're taught.</p>
+      </div>
+
+      <section class="comments" id="comments">
+        <h2>Comments &amp; corrections</h2>
+        <p class="comments-sub">Spot a mistake or want to add something? <strong>Sign in with GitHub to post</strong> — everyone can read. Comments are stored as GitHub Discussions on the repo.</p>
+        <div id="giscus-container"></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toc-backdrop" id="toc-backdrop"></div>
+
+<script src="../assets/notes.js?v=1"></script>
+</body>
+</html>

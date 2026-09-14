@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>LEGL 200 Notes — Introduction to Law</title>
+  <meta name="description" content="Study notes for SAIT LEGL 200 (Introduction to Law): rules vs. laws, how a bill becomes law, the three branches and two levels of government, the Constitution & Charter, classification of law, precedent, and the Alberta court hierarchy." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="../assets/notes.css?v=3" />
+</head>
+<body>
+<div class="container">
+
+  <nav class="site-nav">
+    <a href="../"><i class="ti ti-calendar-week"></i> Schedule</a>
+    <a href="./" class="active"><i class="ti ti-notebook"></i> Notes</a>
+    <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener"><i class="ti ti-school"></i> Tutor</a>
+    <span class="spacer"></span>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode"></button>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">SAIT Legal Assistant · Course Notes</div>
+    <h1>LEGL 200 — Introduction to Law</h1>
+    <p class="lede">The foundations of the <strong>Canadian legal system</strong>: how rules become laws, the three branches and two levels of government, the Constitution and the Charter, how we classify laws, precedent, and the Alberta courts. Pick a topic from the contents; each ends with a quick self-check. More units will be added as the course goes on.</p>
+    <div class="toc-tools" style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn" onclick="window.print()"><i class="ti ti-printer"></i> Print / Save PDF (all topics)</button>
+    </div>
+  </header>
+
+  <div class="mobilebar" id="mobilebar">
+    <button class="mb-menu" id="mb-menu" aria-label="Open contents"><i class="ti ti-list"></i> Contents</button>
+    <span class="mb-current" id="mb-current">1 · Rules vs. laws</span>
+  </div>
+
+  <div class="notes-layout">
+
+    <aside class="toc" id="toc" aria-label="Table of contents">
+      <button class="toc-close" id="toc-close"><i class="ti ti-x"></i> Close</button>
+      <div class="toc-body">
+        <h2>Law &amp; lawmaking</h2>
+        <a href="#rules">1 · Rules vs. laws</a>
+        <a href="#journey">2 · How a rule becomes law</a>
+        <a href="#branches">3 · Three branches of government</a>
+        <h2>Structure of the system</h2>
+        <a href="#levels">4 · Two levels &amp; division of powers</a>
+        <a href="#constitution">5 · The Constitution &amp; Charter</a>
+        <a href="#classify">6 · Classifying law</a>
+        <a href="#courts">7 · Precedent &amp; the Alberta courts</a>
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <!-- 1 -->
+      <section class="topic active" id="rules">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Foundations</span> Law &amp; lawmaking</div>
+          <h2 class="sec-title">1 · Rules vs. laws</h2>
+        </div>
+        <div class="topic-body">
+          <p>We are socialized through a sea of <strong>rules</strong> — at home, school, work, and in the community — that shape and govern our behaviour morally, ethically, socially, and financially. Parents, teachers, bosses, and society make them.</p>
+          <p><strong>Laws</strong> are <em>also</em> rules of conduct meant to guide behaviour in society — but they are <strong>created by government</strong> (federal or provincial, and sometimes the courts) and are <strong>enforceable</strong> by government, government agencies such as the police, and the courts, with legally sanctioned penalties or remedies for non-compliance.</p>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-key"></i> The one line to remember</div>
+            <p><strong>"All laws are rules, but not all rules are laws."</strong> Breaking a plain rule may have consequences, but they are <em>not legally enforceable</em>. Breaking a law carries <strong>legally enforceable</strong> penalties (sanctions).</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th></th><th>Rules</th><th>Laws</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Who makes them</strong></td><td>Parents, teachers, employers, community</td><td>Government (federal/provincial); sometimes the courts</td></tr>
+                <tr><td><strong>Who enforces</strong></td><td>Family, school, workplace, social pressure</td><td>Government, police, the courts</td></tr>
+                <tr><td><strong>Consequences</strong></td><td>Real, but <em>not legally</em> enforceable</td><td>Legally enforceable penalties / remedies</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-quote"></i> From the lecture</div>
+            <p>"Morality cannot be legislated, but behaviour can be regulated… Judicial decrees may not change the heart, but they can restrain the heartless." — Martin Luther King, Jr. In short: <em>you can legislate a change of behaviour, but you cannot legislate a change of heart.</em></p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>What is the single biggest difference between a rule and a law?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Legal enforceability.</span>
+              <p>Both guide conduct, but a <strong>law</strong> is created by government and carries <strong>legally enforceable</strong> penalties enforced by the courts, police, and government. A rule's consequences are not legally enforceable.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="topic" id="journey">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Foundations</span> Law &amp; lawmaking</div>
+          <h2 class="sec-title">2 · How a rule becomes law (the "journey")</h2>
+        </div>
+        <div class="topic-body">
+          <p>The journey from a <em>rule</em> of society to an <em>enforceable law</em> begins when government has the <strong>political will</strong> to act on a perceived need — the classic example is <strong>distracted driving</strong>: as cell-phone use pushed up accidents, claims, and ER visits, a rule of the road became a law.</p>
+          <p>It then travels through all three branches of government:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Step</th><th>Branch</th><th>What happens</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><strong>Executive</strong></td><td>The relevant department <strong>drafts the Bill</strong> and presents it to the legislature.</td></tr>
+                <tr><td>2</td><td><strong>Legislative</strong></td><td>The Bill is voted on in <strong>three readings</strong> (First, Second, Third). A majority government will usually pass it.</td></tr>
+                <tr><td>3</td><td>—</td><td>It becomes an <strong>Act (Statute)</strong>, but is <em>not yet law</em>: it must be <strong>proclaimed in force</strong> by the Premier/PM and receive <strong>royal assent</strong> — the King's representative signs it (<em>Lieutenant Governor</em> provincially / <em>Governor General</em> federally).</td></tr>
+                <tr><td>4</td><td><strong>Judicial</strong></td><td>The courts <strong>enforce and interpret</strong> the Act — "breathing life" into its formal words by applying it to the facts and evidence of each case.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-bulb"></i> Draft vs. vote vs. enforce</div>
+            <p>The <strong>Executive</strong> drafts, the <strong>Legislative</strong> votes it into law, and the <strong>Judicial</strong> branch enforces and interprets it. A Bill only becomes enforceable law after three readings, royal assent, <em>and</em> proclamation in force.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>A Bill has passed three readings in the Legislature. Is it law yet?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Not quite.</span>
+              <p>After passing, it is an <strong>Act/Statute</strong>, but it is not enforceable law until it receives <strong>royal assent</strong> (signed by the King's representative) and is <strong>proclaimed in force</strong> by the Premier or Prime Minister.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="topic" id="branches">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-1">Foundations</span> Law &amp; lawmaking</div>
+          <h2 class="sec-title">3 · The three branches of government</h2>
+        </div>
+        <div class="topic-body">
+          <p>Both the federal and provincial governments have the same three branches:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Branch</th><th>Who</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Legislative</strong></td><td>Elected <strong>MPs</strong> (federal) / <strong>MLAs</strong> (provincial)</td><td>Debate and <strong>vote bills into law</strong>.</td></tr>
+                <tr><td><strong>Executive</strong></td><td><strong>PM</strong> (federal) / <strong>Premier</strong> (provincial) + their <strong>Cabinet</strong></td><td>Run government departments (Ministers of Health, Education, Transportation…) and initiate/draft legislation.</td></tr>
+                <tr><td><strong>Judicial</strong></td><td><strong>Justices</strong> — <em>appointed</em>, not elected</td><td>Interpret and apply the law; create <strong>case law</strong> (judge-made / common law).</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-scale"></i> Judicial independence</div>
+            <p>Justices are <strong>not elected</strong> and are <strong>not beholden</strong> to the other two branches for their decisions. <strong>Judicial independence</strong> keeps politicians (and the public) from influencing or bribing a justice — it is a <em>cornerstone of a free and democratic government</em>.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which branch <em>drafts</em> a bill, which <em>votes</em> it into law, and which <em>enforces</em> it?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Executive → Legislative → Judicial.</span>
+              <p>The <strong>Executive</strong> drafts, the <strong>Legislative</strong> votes, and the <strong>Judicial</strong> branch enforces and interprets — the last one independently of the other two.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="topic" id="levels">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Structure</span> Structure of the system</div>
+          <h2 class="sec-title">4 · Two levels of government &amp; the division of powers</h2>
+        </div>
+        <div class="topic-body">
+          <p>A country with two levels of government is a <strong>federal system</strong>. The Constitution divides <strong>exclusive law-making powers</strong> between them:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Federal — s.91</th><th>Provincial — s.92</th></tr></thead>
+              <tbody>
+                <tr><td>Criminal law, marriage &amp; divorce, currency, interest rates, the postal system, the military, international affairs, bankruptcy, penitentiaries</td><td>Property &amp; civil rights, provincial roads &amp; highways, incorporation of provincial companies, provincial taxation, <strong>municipalities</strong> (which pass <em>by-laws</em>), solemnization of marriage (the licence &amp; ceremony)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>How each legislature is built</h3>
+          <ul>
+            <li><strong>Federal Parliament is bicameral</strong> (two houses): the <strong>Senate</strong> (appointed) and the <strong>House of Commons</strong> (elected — ~338 <strong>MPs</strong> for 338 ridings across Canada).</li>
+            <li><strong>Alberta's legislature is unicameral</strong> (one house): the <strong>Legislative Assembly</strong> (~87 elected <strong>MLAs</strong> for 87 districts). Bills still require <strong>three readings</strong>, just like federally.</li>
+          </ul>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Is <strong>criminal law</strong> a federal or provincial power? What about <strong>municipalities</strong>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Criminal law = federal (s.91); municipalities = provincial (s.92).</span>
+              <p>Criminal law is one of the enumerated <strong>federal</strong> powers under s.91. Municipal governments are created by the <strong>provinces</strong> under s.92 and pass <em>by-laws</em>. (Note: highway-safety matters like distracted driving are <strong>provincial</strong>.)</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 5 -->
+      <section class="topic" id="constitution">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Structure</span> Structure of the system</div>
+          <h2 class="sec-title">5 · The Constitution &amp; the Charter</h2>
+        </div>
+        <div class="topic-body">
+          <p>The <strong>Constitution</strong> is the blueprint for how Canada is governed, and it is the <strong>supreme law</strong> of Canada. It was <strong>repatriated in 1982</strong>; the old <em>BNA Act 1867</em> became the <strong>Constitution Act, 1867</strong>, and the <strong>Charter of Rights and Freedoms</strong> was created in 1982 and embedded in the <strong>Constitution Act, 1982</strong>.</p>
+
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-crown"></i> The three supreme sources of law</div>
+            <p>Together, the <strong>Constitution Act 1867</strong>, the <strong>Constitution Act 1982</strong>, and the <strong>Charter of Rights and Freedoms</strong> are supreme over <em>all</em> federal and provincial laws and <em>all</em> judge-made case law — including the Supreme Court of Canada.</p>
+          </div>
+
+          <h3>What the Constitution does</h3>
+          <ul>
+            <li>Outlines the <strong>structure of Parliament</strong> (bicameral), how elections work, and the role of the monarchy.</li>
+            <li>Divides <strong>law-making powers</strong> — federal (s.91) and provincial (s.92).</li>
+            <li>Creates the <strong>three branches</strong> of government and upholds <strong>judicial independence</strong>.</li>
+            <li>Sets up the <strong>two levels</strong> of government (a federal system).</li>
+            <li>Establishes <strong>parliamentary supremacy</strong>: government-made statutes overrule common law (even the SCC) — <em>subject to compliance with the Charter</em>.</li>
+          </ul>
+
+          <div class="callout tip">
+            <div class="c-label"><i class="ti ti-shield-check"></i> What the Charter guarantees</div>
+            <p>The Charter is a <strong>judicially enforceable</strong> guarantee that government acts consistently with a free and democratic society. Examples: <strong>fundamental freedoms</strong> (conscience &amp; religion, thought/belief/expression, peaceful assembly, association), the right to a <strong>fair and speedy trial</strong>, <strong>equality rights</strong>, and the <strong>right to vote</strong>.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Name the three supreme sources of law in Canada — and is the Charter part of the Constitution?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Constitution Act 1867 · Constitution Act 1982 · Charter of Rights and Freedoms — yes, the Charter is part of the Constitution.</span>
+              <p>The Charter was created in 1982 and embedded in the Constitution Act, 1982, so it shares the Constitution's supreme status. All government and judge-made law must comply with it.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="topic" id="classify">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Structure</span> Structure of the system</div>
+          <h2 class="sec-title">6 · Classifying law</h2>
+        </div>
+        <div class="topic-body">
+          <h3>Two legal systems</h3>
+          <ul>
+            <li><strong>Common law</strong> — no written code; follows prior judge-made <em>case law</em> on similar facts through the doctrine of <strong>precedent</strong>. Used across Canada.</li>
+            <li><strong>Civil law</strong> — a written, <em>codified</em> body of legal principles applied by the courts. Used in <strong>Quebec</strong> (provincial matters only — a "bijural" system) and in Louisiana.</li>
+          </ul>
+
+          <h3>How we group laws</h3>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Split</th><th>Categories</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Reach</strong></td><td><strong>International</strong> (Public — governments/countries, e.g. the International Court of Justice in The Hague; Private — companies/citizens across borders) vs <strong>Domestic</strong> (the laws of Canada)</td></tr>
+                <tr><td><strong>Substance vs. process</strong></td><td><strong>Substantive law</strong> = your <strong>R.O.D.</strong> — Rights, Obligations &amp; Duties (what you must do, can't do, and can expect). <strong>Procedural law</strong> = the rules that <em>enforce</em> substantive law, ensuring accountability and <strong>due process</strong>.</td></tr>
+                <tr><td><strong>Who's involved</strong></td><td><strong>Private law</strong> (between citizens/companies — contract, property, employment, corporate) vs <strong>Public law</strong> (government is a party — criminal, constitutional, tax, immigration, intellectual property)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout watch">
+            <div class="c-label"><i class="ti ti-gavel"></i> Why procedure matters</div>
+            <p>If police fail to follow <strong>procedural</strong> rules — e.g. reading an accused their Charter rights (right to counsel, right to silence) — a court can refuse to admit even a voluntary confession. Procedure protects <strong>due process</strong>, not just the outcome.</p>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Is <strong>contract law</strong> public or private? Is a rule about <em>how</em> to serve court documents substantive or procedural?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Contract law = private; a rule about serving documents = procedural.</span>
+              <p>Contract law governs disputes between private parties (no government as a party). A rule about <em>how</em> a right is enforced or carried out is <strong>procedural</strong>; the right itself (R.O.D.) is <strong>substantive</strong>.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 7 -->
+      <section class="topic" id="courts">
+        <div class="topic-head">
+          <div class="sec-eyebrow"><span class="wk wk-2">Structure</span> Structure of the system</div>
+          <h2 class="sec-title">7 · Precedent &amp; the Alberta courts</h2>
+        </div>
+        <div class="topic-body">
+          <div class="callout key">
+            <div class="c-label"><i class="ti ti-stack-2"></i> Precedent</div>
+            <p>Higher courts <strong>bind</strong> lower ones. A Supreme Court of Canada decision "on point" binds every court in the country — that's <strong>precedent</strong>. But <strong>government-made law trumps all case law</strong> (even the SCC), subject to the Charter.</p>
+          </div>
+
+          <p>Alberta's court hierarchy, from the highest trial court up to the top appeal court:</p>
+          <div class="table-wrap">
+            <table class="grid">
+              <thead><tr><th>Court</th><th>What it does</th><th>Justices</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Alberta Court of Justice</strong> (ACJ)<br><span class="tok">lower trial court</span></td><td>Five divisions: <strong>Civil / Small Claims</strong> (up to $100,000), <strong>Criminal</strong> (first appearances + lower matters), <strong>Traffic</strong> (Justices of the Peace), <strong>Youth</strong> (ages 12 to under 18), <strong>Family</strong> (support, parenting, guardianship)</td><td>Appointed by the <strong>province</strong></td></tr>
+                <tr><td><strong>Alberta King's Bench</strong> (KB)<br><span class="tok">highest trial court</span></td><td>Serious criminal cases, civil cases <strong>over $100,000</strong>, adoptions, matrimonial property, estates &amp; wills. The <strong>only</strong> court with <strong>jury trials</strong>.</td><td>Appointed by the <strong>federal</strong> government</td></tr>
+                <tr><td><strong>Alberta Court of Appeal</strong><br><span class="tok">highest AB appeal court</span></td><td><strong>Not a trial court — no new evidence.</strong> Reviews questions of law and fact from King's Bench; can vary, substitute, reverse, or uphold. Usually a panel of three.</td><td>Appointed by the <strong>federal</strong> government</td></tr>
+                <tr><td><strong>Supreme Court of Canada</strong> (SCC)<br><span class="tok">highest in Canada</span></td><td>Highest appeals court in the country; needs <strong>leave (permission) to appeal</strong>; hears matters of national importance, new law, and constitutional questions. <strong>Binds all Canadian courts.</strong></td><td><strong>Nine</strong>, appointed by the federal government</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <details class="self-check">
+            <summary><span class="q-badge">Check</span><span>Which Alberta court hears <strong>jury trials</strong>, and how many justices sit on the <strong>Supreme Court of Canada</strong>?</span><span class="reveal"><span class="lbl"></span> <i class="ti ti-chevron-down"></i></span></summary>
+            <div class="answer"><div class="a-inner">
+              <span class="verdict">Alberta King's Bench holds jury trials; the SCC has nine justices.</span>
+              <p>King's Bench is the only Alberta court with jury trials (it's the highest trial court). The Supreme Court of Canada has nine federally-appointed justices and requires <em>leave to appeal</em>.</p>
+            </div></div>
+          </details>
+        </div>
+      </section>
+
+      <div class="foot-note">
+        <p><strong>Want to be quizzed and drill your weak spots?</strong> Open the same material in the <a href="https://sait-legal-assistant.vercel.app/" target="_blank" rel="noopener">Study Tutor</a> for Teach-me, cited Q&amp;A, Quiz-me, and flashcards.</p>
+        <p style="margin-top:8px;" class="no-print">Notes summarize the LEGL 200 unit material on the structure of the Canadian legal system, based on the course review notes and Lecture 1. They are a study aid, not legal advice or a substitute for class. More units will be added as they're taught.</p>
+      </div>
+
+      <section class="comments" id="comments">
+        <h2>Comments &amp; corrections</h2>
+        <p class="comments-sub">Spot a mistake or want to add something? <strong>Sign in with GitHub to post</strong> — everyone can read. Comments are stored as GitHub Discussions on the repo.</p>
+        <div id="giscus-container"></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toc-backdrop" id="toc-backdrop"></div>
+
+<script src="../assets/notes.js?v=1"></script>
+</body>
+</html>
