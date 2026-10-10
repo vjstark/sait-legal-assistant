@@ -179,6 +179,24 @@
 
     .topbar p b { color: var(--accent-text); font-weight: 700; }
 
+    .term-switcher {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .pill.term-pill {
+      font-weight: 700;
+      padding: 6px 14px;
+    }
+
+    .pill.term-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
     .topbar-right {
       display: flex;
       align-items: flex-end;
@@ -464,9 +482,9 @@
       position: absolute;
       border-radius: 6px;
       border: 1px solid;
-      padding: 4px 6px;
+      padding: 3px 6px;
       font-size: 11px;
-      line-height: 1.3;
+      line-height: 1.25;
       overflow: hidden;
       cursor: pointer;
       transition: filter 0.1s;
@@ -475,17 +493,18 @@
     .tt-event:hover, .tt-event:active { filter: brightness(1.08); }
 
     .tt-event .tt-event-title {
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 700;
+      white-space: normal;
     }
 
     .tt-event .tt-event-time {
       opacity: 0.85;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    }
+
+    .tt-event .tt-event-instructor {
+      font-weight: 600;
+      margin-top: 1px;
+      white-space: normal;
     }
 
     .tt-event .tt-event-room {
@@ -762,7 +781,8 @@
   </nav>
   <header class="topbar">
     <div>
-      <h1>Legal Assistant — Fall 2026 Schedule</h1>
+      <h1 id="page-title">Legal Assistant — Fall 2026 Schedule</h1>
+      <div class="term-switcher" id="term-switcher" role="tablist" aria-label="Term"></div>
       <p id="subtitle">Southern Alberta Institute of Technology &middot; Sep 1 – Dec 17, 2026</p>
     </div>
     <div class="topbar-right">
@@ -1137,17 +1157,183 @@ const SCHEDULE = {
   }
 };
 
+function winterCourse(title, code, section, color, instructor, sessions, crn) {
+  return {
+    title,
+    code: `${code} · Section ${section}${crn ? ` · CRN ${crn}` : ""}`,
+    type: "inperson",
+    color,
+    instructor,
+    dates: "Winter 2027",
+    sessions
+  };
+}
+
+function meet(days, time) {
+  return { days, time };
+}
+
+const WINTER_SCHEDULE = {
+  A: {
+    label: "Block A",
+    courses: [
+      winterCourse("Law Office Procedures", "LEGA 255", "A", "c1", "Lindsay Savage", [
+        meet("T", "3:00 – 4:50 PM"),
+        meet("Th", "3:00 – 4:50 PM")
+      ]),
+      winterCourse("Legal Computer Applications 2", "LEGA 265", "A", "c2", "LA5 Contract (Primary)", [
+        meet("F", "11:00 AM – 12:50 PM"),
+        meet("T", "12:00 – 1:50 PM")
+      ]),
+      winterCourse("Legal Writing I", "LEGL 250", "A", "c3", "Taylor Le (Primary)", [
+        meet("W", "12:00 – 1:50 PM"),
+        meet("M", "2:00 – 3:50 PM")
+      ]),
+      winterCourse("Litigation Law I", "LEGL 260", "A", "c4", "Aron Klein (Primary)", [
+        meet("M", "11:00 AM – 12:50 PM"),
+        meet("Th", "1:00 – 2:50 PM")
+      ]),
+      winterCourse("Real Estate Law I", "LEGL 270", "A", "c5", "Aituaje Aizenobie…", [
+        meet("F", "8:00 – 9:50 AM"),
+        meet("W", "2:00 – 3:50 PM")
+      ])
+    ]
+  },
+  B: {
+    label: "Block B",
+    courses: [
+      winterCourse("Law Office Procedures", "LEGA 255", "B", "c1", "Lindsay Savage", [
+        meet("M", "8:00 – 9:50 AM"),
+        meet("W", "12:00 – 1:50 PM")
+      ]),
+      winterCourse("Legal Computer Applications 2", "LEGA 265", "B", "c2", "Liam Riley (Primary)", [
+        meet("W", "8:00 – 9:50 AM"),
+        meet("F", "11:00 AM – 12:50 PM")
+      ]),
+      winterCourse("Legal Writing I", "LEGL 250", "B", "c3", "Taylor Le (Primary)", [
+        meet("M", "10:00 – 11:50 AM"),
+        meet("Th", "12:00 – 1:50 PM")
+      ]),
+      winterCourse("Litigation Law I", "LEGL 260", "B", "c4", "Aron Klein (Primary)", [
+        meet("T", "8:00 – 9:50 AM"),
+        meet("F", "8:00 – 9:50 AM")
+      ]),
+      winterCourse("Real Estate Law I", "LEGL 270", "B", "c5", "Aituaje Aizenobie…", [
+        meet("T", "10:00 – 11:50 AM"),
+        meet("Th", "3:00 – 4:50 PM")
+      ], "31611")
+    ]
+  },
+  C: {
+    label: "Block C",
+    courses: [
+      winterCourse("Law Office Procedures", "LEGA 255", "C", "c1", "Lindsay Savage", [
+        meet("F", "12:00 – 1:50 PM"),
+        meet("M", "2:00 – 3:50 PM")
+      ]),
+      winterCourse("Legal Computer Applications 2", "LEGA 265", "C", "c2", "Liam Riley (Primary)", [
+        meet("W", "10:00 – 11:50 AM"),
+        meet("M", "12:00 – 1:50 PM")
+      ]),
+      winterCourse("Legal Writing I", "LEGL 250", "C", "c3", "Taylor Le (Primary)", [
+        meet("W", "8:00 – 9:50 AM"),
+        meet("F", "10:00 – 11:50 AM")
+      ]),
+      winterCourse("Litigation Law I", "LEGL 260", "C", "c4", "Aron Klein (Primary)", [
+        meet("Th", "8:00 – 9:50 AM"),
+        meet("T", "1:00 – 2:50 PM")
+      ]),
+      winterCourse("Real Estate Law I", "LEGL 270", "C", "c5", "Aituaje Aizenobie…", [
+        meet("Th", "10:00 – 11:50 AM"),
+        meet("T", "3:00 – 4:50 PM")
+      ])
+    ]
+  },
+  D: {
+    label: "Block D",
+    courses: [
+      winterCourse("Law Office Procedures", "LEGA 255", "D", "c1", "Taylor Le (Primary)", [
+        meet("T", "3:00 – 4:50 PM"),
+        meet("Th", "3:00 – 4:50 PM")
+      ]),
+      winterCourse("Legal Computer Applications 2", "LEGA 265", "D", "c2", "LA5 Contract (Primary)", [
+        meet("M", "10:00 – 11:50 AM"),
+        meet("W", "2:00 – 3:50 PM")
+      ]),
+      winterCourse("Legal Writing I", "LEGL 250", "D", "c3", "Linda Gardner (Primary)", [
+        meet("T", "12:00 – 1:50 PM"),
+        meet("Th", "1:00 – 2:50 PM")
+      ]),
+      winterCourse("Litigation Law I", "LEGL 260", "D", "c4", "Aron Klein (Primary)", [
+        meet("F", "10:00 – 11:50 AM"),
+        meet("W", "12:00 – 1:50 PM")
+      ]),
+      winterCourse("Real Estate Law I", "LEGL 270", "D", "c5", "Aituaje Aizenobie…", [
+        meet("M", "8:00 – 9:50 AM"),
+        meet("F", "1:00 – 2:50 PM")
+      ])
+    ]
+  }
+};
+
+const TERMS = {
+  fall: {
+    label: "Fall 2026",
+    title: "Legal Assistant — Fall 2026 Schedule",
+    dateLabel: "Sep 1 – Dec 17, 2026",
+    start: TERM_START,
+    end: TERM_END,
+    blocks: ["A", "C"],
+    alt: "AM",
+    notice: "",
+    schedule: SCHEDULE
+  },
+  winter: {
+    label: "Winter 2027",
+    title: "Legal Assistant — Winter 2027 Schedule",
+    dateLabel: "Winter 2027",
+    start: null,
+    end: null,
+    blocks: ["A", "B", "C", "D"],
+    alt: null,
+    notice: "Each section is 3 credits, in person, and capped at 40 seats. Rooms and most CRNs aren’t listed yet. “LA5 Contract” is a placeholder for an unassigned instructor.",
+    schedule: WINTER_SCHEDULE
+  }
+};
+
+function activeTerm() {
+  return TERMS[currentTerm];
+}
+
+function activeSchedule() {
+  return activeTerm().schedule;
+}
+
+function getInitialTerm() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const fromUrl = (params.get("term") || "").toLowerCase();
+    if (TERMS[fromUrl]) return fromUrl;
+    const stored = localStorage.getItem("term");
+    if (TERMS[stored]) return stored;
+  } catch (e) {}
+  return "fall";
+}
+
 function getInitialBlock() {
+  const schedule = activeSchedule();
+  const term = activeTerm();
   try {
     const params = new URLSearchParams(location.search);
     const fromUrl = (params.get("block") || "").toUpperCase();
-    if (fromUrl && SCHEDULE[fromUrl]) return fromUrl;
+    if (fromUrl && schedule[fromUrl] && (term.blocks.includes(fromUrl) || fromUrl === term.alt)) return fromUrl;
     const stored = localStorage.getItem("block");
-    if (stored && SCHEDULE[stored]) return stored;
+    if (stored && schedule[stored] && (term.blocks.includes(stored) || stored === term.alt)) return stored;
   } catch (e) {}
-  return "A";
+  return term.blocks[0];
 }
 
+let currentTerm = getInitialTerm();
 let currentBlock = getInitialBlock();
 let currentFilter = "all";
 let currentEvents = [];
@@ -1168,16 +1354,20 @@ function openEventModal(idx) {
   const ev = currentEvents[idx];
   if (!ev) return;
   const c = ev.course;
-  const { building, roomCode } = parseRoom(ev.room);
-  document.getElementById("modal-body").innerHTML = `
-    <span class="badge ${badges[c.type].cls}">${badges[c.type].label}</span>
-    <h2 class="modal-title">${c.title}</h2>
-    <div class="modal-code">${c.code}</div>
+  const where = ev.room ? (() => {
+    const { building, roomCode } = parseRoom(ev.room);
+    return `
     <div class="modal-where-callout">
       <div class="modal-where-label"><i class="ti ti-map-pin"></i> Where to go</div>
       <div class="modal-room-big">${roomCode}</div>
       <div class="modal-building">${building}</div>
-    </div>
+    </div>`;
+  })() : "";
+  document.getElementById("modal-body").innerHTML = `
+    <span class="badge ${badges[c.type].cls}">${badges[c.type].label}</span>
+    <h2 class="modal-title">${c.title}</h2>
+    <div class="modal-code">${c.code}</div>
+    ${where}
     <div class="modal-detail"><i class="ti ti-clock"></i><div><div class="modal-detail-label">When</div>${DAY_FULL[ev.daysLabel] || ev.daysLabel} &middot; ${ev.time}</div></div>
     <div class="modal-detail"><i class="ti ti-user"></i><div><div class="modal-detail-label">Instructor</div>${c.instructor}</div></div>
     <div class="modal-detail"><i class="ti ti-calendar"></i><div><div class="modal-detail-label">Term dates</div>${c.dates}</div></div>
@@ -1195,13 +1385,15 @@ function startOfDay(d) {
 }
 
 function getTermStatus() {
+  const meta = activeTerm();
+  if (!meta.start || !meta.end) return { inTerm: false, message: null };
   const today = startOfDay(new Date());
-  if (today < TERM_START) {
-    const days = Math.round((TERM_START - today) / 86400000);
-    return { inTerm: false, message: `Term starts ${TERM_START.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} — ${days} day${days === 1 ? "" : "s"} away` };
+  if (today < meta.start) {
+    const days = Math.round((meta.start - today) / 86400000);
+    return { inTerm: false, message: `Term starts ${meta.start.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })} — ${days} day${days === 1 ? "" : "s"} away` };
   }
-  if (today > TERM_END) {
-    return { inTerm: false, message: `Term ended ${TERM_END.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` };
+  if (today > meta.end) {
+    return { inTerm: false, message: `Term ended ${meta.end.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}` };
   }
   return { inTerm: true, message: null };
 }
@@ -1257,8 +1449,8 @@ function renderClock() {
   const term = getTermStatus();
   const termChip = document.getElementById("term-chip");
   if (termChip) {
-    termChip.hidden = term.inTerm;
-    if (!term.inTerm) {
+    termChip.hidden = term.inTerm || !term.message;
+    if (term.message) {
       termChip.innerHTML = `<i class="ti ti-info-circle"></i> ${term.message}`;
     }
   }
@@ -1276,14 +1468,17 @@ function getNextClass(courses) {
   const events = getEvents(courses);
   if (!events.length) return null;
 
+  const meta = activeTerm();
+  if (!meta.start || !meta.end) return null;
+
   const now = new Date();
   const term = getTermStatus();
   let searchDate = startOfDay(now);
   let todayMinuteFloor = now.getHours() * 60 + now.getMinutes();
 
   if (!term.inTerm) {
-    if (now < TERM_START) {
-      searchDate = startOfDay(TERM_START);
+    if (now < meta.start) {
+      searchDate = startOfDay(meta.start);
       todayMinuteFloor = -1;
     } else {
       return null;
@@ -1292,7 +1487,7 @@ function getNextClass(courses) {
 
   for (let i = 0; i < 14; i++) {
     const d = new Date(searchDate.getFullYear(), searchDate.getMonth(), searchDate.getDate() + i);
-    if (d > TERM_END) break;
+    if (d > meta.end) break;
     const dow = d.getDay();
     if (dow === 0 || dow === 6) continue;
     const dayIdx = dow - 1;
@@ -1312,52 +1507,90 @@ function renderNextClass(courses) {
   if (!next) { el.innerHTML = ""; return; }
   const { ev, date } = next;
   const dayLabel = formatRelativeDay(date, new Date());
+  const roomBit = ev.room ? ` &middot; <span class="next-class-room"><i class="ti ti-map-pin"></i>${ev.room}</span>` : "";
   el.innerHTML = `
     <div class="next-class-banner">
       <i class="ti ti-arrow-right next-class-icon"></i>
       <div>
         <div class="next-class-label">Next class</div>
-        <div class="next-class-main"><b>${ev.course.title}</b> &middot; ${dayLabel} &middot; ${ev.time} &middot; <span class="next-class-room"><i class="ti ti-map-pin"></i>${ev.room}</span></div>
+        <div class="next-class-main"><b>${ev.course.title}</b> &middot; ${dayLabel} &middot; ${ev.time}${roomBit}</div>
       </div>
     </div>`;
 }
 
-/* ---------- Block switcher ---------- */
-const MAIN_BLOCKS = ["A", "C"];
+/* ---------- Term and block switchers ---------- */
+function renderTermSwitcher() {
+  const el = document.getElementById("term-switcher");
+  if (!el) return;
+  el.innerHTML = Object.keys(TERMS).map(key => `
+    <button type="button" class="pill term-pill${key === currentTerm ? " active" : ""}" role="tab" aria-selected="${key === currentTerm}" onclick="switchTerm('${key}')">${TERMS[key].label}</button>
+  `).join("");
+}
 
 function renderBlockSwitcher() {
+  const term = activeTerm();
+  const schedule = activeSchedule();
+  renderTermSwitcher();
+
   const el = document.getElementById("block-switcher");
-  el.innerHTML = MAIN_BLOCKS.map(key => `
-    <button class="pill block-pill${key === currentBlock ? " active" : ""}" onclick="switchBlock('${key}')">${SCHEDULE[key].label}</button>
+  el.innerHTML = term.blocks.map(key => `
+    <button type="button" class="pill block-pill${key === currentBlock ? " active" : ""}" onclick="switchBlock('${key}')">${schedule[key].label}</button>
   `).join("");
 
   const altLink = document.getElementById("alt-schedule-link");
   if (altLink) {
-    if (currentBlock === "AM") {
-      altLink.innerHTML = `&larr; Back to <b>${SCHEDULE.A.label}</b>`;
-      altLink.onclick = () => switchBlock("A");
+    if (!term.alt) {
+      altLink.hidden = true;
+    } else if (currentBlock === term.alt) {
+      altLink.hidden = false;
+      altLink.innerHTML = `&larr; Back to <b>${schedule[term.blocks[0]].label}</b>`;
+      altLink.onclick = () => switchBlock(term.blocks[0]);
     } else {
-      altLink.innerHTML = `Viewing an individual schedule instead? <b>${SCHEDULE.AM.label}</b> &rarr;`;
-      altLink.onclick = () => switchBlock("AM");
+      altLink.hidden = false;
+      altLink.innerHTML = `Viewing an individual schedule instead? <b>${schedule[term.alt].label}</b> &rarr;`;
+      altLink.onclick = () => switchBlock(term.alt);
     }
   }
 
-  const label = SCHEDULE[currentBlock].label;
-  document.title = `${label} — SAIT Legal Assistant Schedule`;
+  const label = schedule[currentBlock].label;
+  document.title = `${label} — ${term.label} — SAIT Legal Assistant Schedule`;
+  const pageTitle = document.getElementById("page-title");
+  if (pageTitle) pageTitle.textContent = term.title;
   const subtitle = document.getElementById("subtitle");
-  if (subtitle) subtitle.innerHTML = `Southern Alberta Institute of Technology &middot; <b>${label}</b> &middot; Sep 1 – Dec 17, 2026`;
+  if (subtitle) subtitle.innerHTML = `Southern Alberta Institute of Technology &middot; <b>${label}</b> &middot; ${term.dateLabel}`;
+}
+
+function persistSelection() {
+  try {
+    localStorage.setItem("term", currentTerm);
+    localStorage.setItem("block", currentBlock);
+  } catch (e) {}
+  try {
+    const url = new URL(location.href);
+    url.searchParams.set("term", currentTerm);
+    url.searchParams.set("block", currentBlock.toLowerCase());
+    history.replaceState(null, "", url);
+  } catch (e) {}
+}
+
+function switchTerm(termId) {
+  if (!TERMS[termId] || termId === currentTerm) return;
+  currentTerm = termId;
+  const term = activeTerm();
+  const schedule = activeSchedule();
+  if (!schedule[currentBlock] || (!term.blocks.includes(currentBlock) && currentBlock !== term.alt)) {
+    currentBlock = term.blocks[0];
+  }
+  currentFilter = "all";
+  persistSelection();
+  renderAll();
 }
 
 function switchBlock(block) {
-  if (!SCHEDULE[block]) return;
+  if (!activeSchedule()[block]) return;
   currentBlock = block;
   currentFilter = "all";
-  try { localStorage.setItem("block", block); } catch (e) {}
-  try {
-    const url = new URL(location.href);
-    url.searchParams.set("block", block.toLowerCase());
-    history.replaceState(null, "", url);
-  } catch (e) {}
+  persistSelection();
   renderAll();
 }
 
@@ -1372,18 +1605,26 @@ function renderStats(courses) {
 /* ---------- Empty / pending block state ---------- */
 function renderEmptyState(courses) {
   const el = document.getElementById("empty-block-container");
-  const pending = SCHEDULE[currentBlock].pending || [];
+  const block = activeSchedule()[currentBlock];
+  const pending = block.pending || [];
+  const notice = activeTerm().notice;
   if (!courses.length) {
     el.innerHTML = `
       <div class="empty-block-note">
         <i class="ti ti-info-circle"></i>
-        <span>${SCHEDULE[currentBlock].label} schedule hasn't been added yet — check back soon.</span>
+        <span>${block.label} schedule hasn't been added yet — check back soon.</span>
       </div>`;
   } else if (pending.length) {
     el.innerHTML = `
       <div class="empty-block-note">
         <i class="ti ti-info-circle"></i>
-        <span>${SCHEDULE[currentBlock].label} is still missing: ${pending.join(", ")} — will be added once confirmed.</span>
+        <span>${block.label} is still missing: ${pending.join(", ")} — will be added once confirmed.</span>
+      </div>`;
+  } else if (notice) {
+    el.innerHTML = `
+      <div class="empty-block-note">
+        <i class="ti ti-info-circle"></i>
+        <span>${notice}</span>
       </div>`;
   } else {
     el.innerHTML = "";
@@ -1428,7 +1669,7 @@ function filter(type, btn) {
   currentFilter = type;
   document.querySelectorAll(".filters .pill").forEach(p => p.classList.remove("active"));
   btn.classList.add("active");
-  const courses = SCHEDULE[currentBlock].courses;
+  const courses = activeSchedule()[currentBlock].courses;
   const filtered = type === "all" ? courses : courses.filter(c => c.type === type);
   renderCards(filtered);
   applyFilterDim();
@@ -1562,16 +1803,21 @@ function buildTimetable(courses) {
       const height = Math.max((ev.end - ev.start) * PX_PER_MIN, 30);
       const width = 100 / ev.lanes;
       const left = ev.lane * width;
+      const roomTitle = ev.room ? ` · ${ev.room}` : "";
+      const roomHtml = ev.room
+        ? `<div class="tt-event-room"><i class="ti ti-map-pin"></i> ${ev.room.replace(/^Online · /, "")}</div>`
+        : "";
       return `
         <div class="tt-event"
              data-type="${ev.course.type}"
              onclick="openEventModal(${ev.idx})"
-             title="${ev.course.title} · ${DAY_FULL[ev.daysLabel] || ev.daysLabel} ${ev.time} · ${ev.room}"
+             title="${ev.course.title} · ${ev.course.instructor} · ${DAY_FULL[ev.daysLabel] || ev.daysLabel} ${ev.time}${roomTitle}"
              style="top:${top}px; height:${height}px; left:calc(${left}% + 2px); width:calc(${width}% - 4px);
                     background: var(--${ev.course.color}-bg); border-color: var(--${ev.course.color}-border); color: var(--${ev.course.color}-text);">
           <div class="tt-event-title">${ev.course.title}</div>
           <div class="tt-event-time">${ev.time}</div>
-          <div class="tt-event-room"><i class="ti ti-map-pin"></i> ${ev.room.replace(/^Online · /, "")}</div>
+          <div class="tt-event-instructor">${ev.course.instructor}</div>
+          ${roomHtml}
         </div>`;
     }).join("");
     return `<div class="tt-day-col${dayIdx === todayIdx ? " today" : ""}" style="height:${bodyHeight}px">${eventsHtml}</div>`;
@@ -1617,7 +1863,7 @@ function buildTimetable(courses) {
 }
 
 function renderAll() {
-  const courses = SCHEDULE[currentBlock].courses;
+  const courses = activeSchedule()[currentBlock].courses;
   renderBlockSwitcher();
   renderStats(courses);
   renderNextClass(courses);
@@ -1632,7 +1878,7 @@ renderClock();
 renderAll();
 setInterval(renderClock, 30000);
 setInterval(() => {
-  const courses = SCHEDULE[currentBlock].courses;
+  const courses = activeSchedule()[currentBlock].courses;
   buildTimetable(courses);
   applyFilterDim();
   renderNextClass(courses);
